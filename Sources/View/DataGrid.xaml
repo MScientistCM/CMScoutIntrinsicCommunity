@@ -1,0 +1,215 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:m="using:CMScoutIntrinsic">
+    
+    <SolidColorBrush x:Key="DataGridColumnHeaderSeparatorBrush"     Color="{ThemeResource SystemAltHighColor}"                  />
+    <SolidColorBrush x:Key="DataGridHighlightListAccentLowBrush"    Color="{ThemeResource SystemAccentColor}"     Opacity="0.4" />
+    <SolidColorBrush x:Key="DataGridHighlightListAccentMediumBrush" Color="{ThemeResource SystemAccentColor}"     Opacity="0.6" />
+    <SolidColorBrush x:Key="DataGridHighlightListAccentHighBrush"   Color="{ThemeResource SystemAccentColor}"     Opacity="0.7" />
+    <SolidColorBrush x:Key="DataGridHighlightListLowBrush"          Color="{ThemeResource SystemListLowColor}"                  />
+    <SolidColorBrush x:Key="DataGridHighlightListMediumBrush"       Color="{ThemeResource SystemListMediumColor}"               />
+
+    <m:SwitchConverter x:Key="DataGridColumnSortDirectionToGlyphConverter" Default="">
+        <m:Case Key="Ascending"  Value="&#xEB11;" />
+        <m:Case Key="Descending" Value="&#xEB0F;" />
+    </m:SwitchConverter>
+
+    <m:SwitchConverter x:Key="DataGridRowStateToBackgroundConverter" Default="{x:Null}">
+        <m:Case Key="PressedSelected"     Value="{StaticResource DataGridHighlightListAccentHighBrush}"   />
+        <m:Case Key="PointerOverSelected" Value="{StaticResource DataGridHighlightListAccentMediumBrush}" />
+        <m:Case Key="Selected"            Value="{StaticResource DataGridHighlightListAccentLowBrush}"    />
+        <m:Case Key="Pressed"             Value="{StaticResource DataGridHighlightListMediumBrush}"       />
+        <m:Case Key="PointerOver"         Value="{StaticResource DataGridHighlightListLowBrush}"          />
+        <m:Case Key="Normal"              Value="{x:Null}"                                                />
+    </m:SwitchConverter>
+
+    <Style TargetType="m:DataGrid">
+        <Setter Property="HeaderHeight"   Value="32"   />
+        <Setter Property="RowHeight"      Value="48"   />
+        <Setter Property="LinesThickness" Value="1"    />
+        <Setter Property="LinesBrush"     Value="{StaticResource SystemControlForegroundChromeHighBrush}" />
+        <Setter Property="SelectionMode"  Value="None" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="m:DataGrid">
+                    <Grid
+                        Name="GridRoot"
+                        BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LinesThickness, Converter={StaticResource DoubleToThicknessConverter}}"
+                        BorderBrush="{TemplateBinding LinesBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid
+                            Name="GridHeader"
+                            Grid.Row="0" Grid.Column="0">
+                        </Grid>
+                        <ListView
+                            Name="ListView"
+                            Grid.Row="1" Grid.Column="0"
+                            ShowsScrollingPlaceholders="False"
+                            SelectionMode="{TemplateBinding SelectionMode}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    <Setter Property="VerticalContentAlignment"   Value="Stretch" />
+                                    <Setter Property="Padding"                    Value="0"       />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListViewItem">
+                                                <!--
+                                                <ListViewItemPresenter
+                                                    ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                    Control.IsTemplateFocusTarget="True"
+                                                    FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
+                                                    FocusVisualPrimaryBrush="{TemplateBinding FocusVisualPrimaryBrush}"
+                                                    FocusVisualPrimaryThickness="{TemplateBinding FocusVisualPrimaryThickness}"
+                                                    FocusVisualSecondaryBrush="{TemplateBinding FocusVisualSecondaryBrush}"
+                                                    FocusVisualSecondaryThickness="{TemplateBinding FocusVisualSecondaryThickness}"
+                                                    SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}"
+                                                    CheckBrush="{ThemeResource ListViewItemCheckBrush}"
+                                                    CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}"
+                                                    DragBackground="{ThemeResource ListViewItemDragBackground}"
+                                                    DragForeground="{ThemeResource ListViewItemDragForeground}"
+                                                    FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}"
+                                                    FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}"
+                                                    PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}"
+                                                    PointerOverBackground="{ThemeResource ListViewItemBackgroundPointerOver}"
+                                                    PointerOverForeground="{ThemeResource ListViewItemForegroundPointerOver}"
+                                                    SelectedBackground="{ThemeResource ListViewItemBackgroundSelected}"
+                                                    SelectedForeground="{ThemeResource ListViewItemForegroundSelected}"
+                                                    SelectedPointerOverBackground="{ThemeResource ListViewItemBackgroundSelectedPointerOver}"
+                                                    PressedBackground="{ThemeResource ListViewItemBackgroundPressed}"
+                                                    SelectedPressedBackground="{ThemeResource ListViewItemBackgroundSelectedPressed}"
+                                                    DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                                    DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                                                    ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                    ContentMargin="{TemplateBinding Padding}"
+                                                    CheckMode="{ThemeResource ListViewItemCheckMode}" />
+                                                -->
+                                                <ListViewItemPresenter
+                                                    ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                    Control.IsTemplateFocusTarget="True"
+                                                    FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
+                                                    FocusVisualPrimaryBrush="{TemplateBinding FocusVisualPrimaryBrush}"
+                                                    FocusVisualPrimaryThickness="0"
+                                                    FocusVisualSecondaryBrush="{TemplateBinding FocusVisualSecondaryBrush}"
+                                                    FocusVisualSecondaryThickness="0"
+                                                    SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}"
+                                                    CheckBrush="{ThemeResource ListViewItemCheckBrush}"
+                                                    CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}"
+                                                    DragBackground="{ThemeResource ListViewItemDragBackground}"
+                                                    DragForeground="{ThemeResource ListViewItemDragForeground}"
+                                                    FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}"
+                                                    FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}"
+                                                    PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}"
+                                                    PointerOverBackground="{x:Null}"
+                                                    PointerOverForeground="{ThemeResource ListViewItemForegroundPointerOver}"
+                                                    SelectedBackground="{x:Null}"
+                                                    SelectedForeground="{ThemeResource ListViewItemForegroundSelected}"
+                                                    SelectedPointerOverBackground="{x:Null}"
+                                                    PressedBackground="{x:Null}"
+                                                    SelectedPressedBackground="{x:Null}"
+                                                    DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                                    DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                                                    ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                    ContentMargin="{TemplateBinding Padding}"
+                                                    CheckMode="{ThemeResource ListViewItemCheckMode}" />
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <m:DataGridRowItem />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="m:DataGridColumnHeaderItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment"   Value="Stretch" />
+        <Setter Property="Background"                 Value="{StaticResource SystemControlBackgroundBaseLowBrush}" />
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock
+                            Text="{Binding Column.Text}"
+                            m:Loc.String="{Binding Column.LocString}"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            Margin="8,0,8,0" />
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="m:DataGridColumnHeaderItem">
+                    <Grid
+                        Background="{TemplateBinding Background}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderBrush="{TemplateBinding BorderBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ContentPresenter
+                            Grid.Row="0" Grid.Column="0"
+                            Name="ContentPresenter"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            ContentTransitions="{TemplateBinding ContentTransitions}"
+                            Content="{TemplateBinding Content}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        <TextBlock
+                            Grid.Row="0" Grid.Column="1"
+                            DataContext="{Binding Column}"
+                            Text="{Binding SortDirection, Converter={StaticResource DataGridColumnSortDirectionToGlyphConverter}}"
+                            Visibility="{Binding CanSort, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            FontFamily="{ThemeResource SymbolThemeFontFamily}" FontSize="12"
+                            VerticalAlignment="Center"
+                            Margin="0,0,8,0" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="m:DataGridRowItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="m:DataGridRowItem">
+                    <Grid
+                        Name="GridRoot"
+                        Background="Transparent">
+                        <Grid
+                            Name="GridContent">
+                        </Grid>
+                        <Rectangle
+                            Fill="{Binding State, Converter={StaticResource DataGridRowStateToBackgroundConverter}}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,282 @@
+﻿<Application
+    x:Class="CMScoutIntrinsic.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:m="using:CMScoutIntrinsic"
+    RequestedTheme="Light">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <Thickness x:Key="PivotHeaderItemMargin">16,0,8,0</Thickness>
+                    <Thickness x:Key="PivotItemMargin">16,0,16,16</Thickness>
+                    <Thickness x:Key="FlyoutContentThemePadding">16,16,16,16</Thickness>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <m:xStatic x:Key="xStatic" />
+
+                    <FontFamily x:Key="MonospacedFontFamily">/Resources/Fonts/DroidSansMono.ttf#Droid Sans Mono</FontFamily>
+
+                    <SolidColorBrush x:Key="PageBackgroundThemeBrush" Color="#FFFAFAFA" />
+                    <SolidColorBrush x:Key="PageCommandBar2Brush"     Color="#FFF0F0F0" />
+                    <SolidColorBrush x:Key="CA18HighlightBackground"  Color="#FFC0C0C0" />
+                    <SolidColorBrush x:Key="ActiveReleaseClauseBrush" Color="DarkRed"   />
+
+                    <m:ConditionConverter x:Key="InverseBooleanConverter"              Condition="==" OnRight="True"     IfTrue="False"     IfFalse="True"      />
+                    <m:ConditionConverter x:Key="BooleanToVisibilityConverter"         Condition="==" OnRight="False"    IfTrue="Collapsed" IfFalse="Visible"   />
+                    <m:ConditionConverter x:Key="BooleanToInvertedVisibilityConverter" Condition="==" OnRight="False"    IfTrue="Visible"   IfFalse="Collapsed" />
+                    <m:ConditionConverter x:Key="NullToVisibilityConverter"            Condition="==" OnRight="{x:Null}" IfTrue="Collapsed" IfFalse="Visible"   />
+                    <m:ConditionConverter x:Key="NullToInvertedVisibilityConverter"    Condition="==" OnRight="{x:Null}" IfTrue="Visible"   IfFalse="Collapsed" />
+                    <m:ConditionConverter x:Key="EmptyToVisibilityConverter"           Condition="==" OnRight=""         IfTrue="Collapsed" IfFalse="Visible"   />
+                    <m:ConditionConverter x:Key="EmptyToInvertedVisibilityConverter"   Condition="==" OnRight=""         IfTrue="Visible"   IfFalse="Collapsed" />
+                    <m:ConditionConverter x:Key="BooleanToOpacityConverter"            Condition="==" OnRight="False"    IfTrue="0.0"       IfFalse="1.0"       />
+                    <m:ConditionConverter x:Key="BooleanToInvertedOpacityConverter"    Condition="==" OnRight="False"    IfTrue="1.0"       IfFalse="0.0"       />
+
+                    <m:StringFormatConverter          x:Key="StringFormatConverter"          />
+                    <m:EnumerableToElementAtConverter x:Key="EnumerableToElementAtConverter" />
+                    <m:DoubleToThicknessConverter     x:Key="DoubleToThicknessConverter"     />
+
+                    <m:LocalizationConverter x:Key="LocalizationConverter" />
+
+                    <m:StringFormatConverter                x:Key="Double2Converter" Format="{}{0:0.00}" />
+                    <m:PlayerToHeaderStringConverter        x:Key="PlayerToHeaderStringConverter"        />
+                    <m:PlayerToSubheaderStringConverter     x:Key="PlayerToSubheaderStringConverter"     />
+                    <m:PlayerToPositionShortStringConverter x:Key="PlayerToPositionShortStringConverter" />
+                    <m:PlayerToPositionStringConverter      x:Key="PlayerToPositionStringConverter"      />
+
+                    <x:String x:Key="AnyNationGroupName">** Any Nation **</x:String>
+                    <x:String x:Key="AnyClubName">** Any Club **</x:String>
+                    <x:String x:Key="AnyDivisionName">** Any Division **</x:String>
+                    
+                    <!-- RateTheAppButton -->
+                    <Style x:Key="RateTheAppButtonStyle" TargetType="Button">
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <StackPanel
+                                        Orientation="Horizontal">
+                                        <Image
+                                            Source="ms-appx:///Resources/MicrosoftStore.png"
+                                            Width="48" Height="48"
+                                            VerticalAlignment="Center"
+                                            Margin="8,0,0,0" />
+                                        <TextBlock
+                                            Text="Rate the app"
+                                            VerticalAlignment="Center"
+                                            Margin="0,0,16,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                    <m:ContractTypeToStringConverter       x:Key="ContractTypeToStringConverter"       />
+                    <m:SquadStatusToStringConverter        x:Key="SquadStatusToStringConverter"        />
+                    <m:TransferStatusToStringConverter     x:Key="TransferStatusToStringConverter"     />
+                    <m:ContractProtectionToStringConverter x:Key="ContractProtectionToStringConverter" />
+                    <m:LoanStatusToStringConverter         x:Key="LoanStatusToStringConverter"         />
+                    <m:FutureToStringConverter             x:Key="FutureToStringConverter"             />
+
+                    <m:ConditionConverter x:Key="BonusToVisibilityConverter" Condition="==" OnRight="-1" IfTrue="Collapsed" IfFalse="Visible" />
+                    <m:ConditionConverter x:Key="ActiveReleaseClauseToBrushConverter" Condition="==" OnRight="True" IfTrue="{StaticResource ActiveReleaseClauseBrush}" IfFalse="{x:Null}" />
+                    
+                    <!-- CompareItemsPanel -->
+                    <Style x:Key="CompareItemsPanelStyle" TargetType="ContentControl">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="VerticalContentAlignment"   Value="Stretch" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Grid
+                                        Height="0"
+                                        Visibility="Collapsed"
+                                        Name="ContentRoot">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="48" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"   />
+                                            <ColumnDefinition Width="180" /> <!-- LeftItem-->
+                                            <ColumnDefinition Width="8"   /> <!-- Margin -->
+                                            <ColumnDefinition Width="32"  /> <!-- LeftItem flag -->
+                                            <ColumnDefinition Width="16"  /> <!-- Margin -->
+                                            <ColumnDefinition Width="48"  /> <!-- RemoveLeftItem button -->
+                                            <ColumnDefinition Width="48"  /> <!-- Margin -->
+                                            <ColumnDefinition Width="48"  /> <!-- Compare button -->
+                                            <ColumnDefinition Width="48"  /> <!-- Margin -->
+                                            <ColumnDefinition Width="48"  /> <!-- RemoveRightItem button -->
+                                            <ColumnDefinition Width="16"  /> <!-- Margin -->
+                                            <ColumnDefinition Width="32"  /> <!-- RightItem flag -->
+                                            <ColumnDefinition Width="8"   /> <!-- Margin -->
+                                            <ColumnDefinition Width="180" /> <!-- RightItem-->
+                                            <ColumnDefinition Width="*"   />
+                                        </Grid.ColumnDefinitions>
+
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup>
+                                                <VisualState x:Name="Collapsed">
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetName="ContentRoot" Storyboard.TargetProperty="Height"
+                                                            To="0"
+                                                            Duration="0:0:0.5"
+                                                            EnableDependentAnimation="True" />
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentRoot" Storyboard.TargetProperty="Visibility">
+                                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="Collapsed" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Visible">
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentRoot" Storyboard.TargetProperty="Visibility">
+                                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="Visible" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetName="ContentRoot" Storyboard.TargetProperty="Height"
+                                                            To="48" 
+                                                            Duration="0:0:0.5"
+                                                            EnableDependentAnimation="True" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+
+                                        <Rectangle
+                                            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="15"
+                                            Fill="{StaticResource PageCommandBar2Brush}" />
+
+                                        <TextBlock
+                                            Grid.Row="0" Grid.Column="0"
+                                            m:Loc.Context="CompareItemsPanel" m:Loc.Source="Compare"
+                                            Style="{StaticResource SubtitleTextBlockStyle}"
+                                            Margin="16,0,0,0"
+                                            VerticalAlignment="Center" />
+
+                                        <Grid
+                                            Grid.Row="0" Grid.Column="1"
+                                            Visibility="{Binding LeftItem, Converter={StaticResource NullToVisibilityConverter}}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition>
+                                                    <RowDefinition.Height>
+                                                        <Binding Path="LeftItem.FirstName">
+                                                            <Binding.Converter>
+                                                                <m:ConditionConverter Condition="==" OnRight="" IfTrue="Auto" IfFalse="*" />
+                                                            </Binding.Converter>
+                                                        </Binding>
+                                                    </RowDefinition.Height>
+                                                </RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock
+                                                Grid.Row="0" Grid.Column="0"
+                                                Text="{Binding LeftItem.SecondName}"
+                                                HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                            <TextBlock
+                                                Grid.Row="1" Grid.Column="0"
+                                                Text="{Binding LeftItem.FirstName}"
+                                                HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                Foreground="{StaticResource SystemControlForegroundBaseMediumBrush}"
+                                                Visibility="{Binding RelativeSource={RelativeSource Self}, Path=Text, Converter={StaticResource EmptyToVisibilityConverter}}" />
+                                        </Grid>
+                                        
+                                        <!--
+                                        <Image
+                                            Grid.Row="0" Grid.Column="3"
+                                            Source="{Binding LeftItem.Nation.Code, Converter={StaticResource NationCodeToFlagImagePathConverter}, ConverterParameter=32x32}"
+                                            Visibility="{Binding LeftItem, Converter={StaticResource NullToVisibilityConverter}}" />
+                                        -->
+                                        
+                                        <Button
+                                            Grid.Row="0" Grid.Column="5"
+                                            Style="{StaticResource NavigationBackButtonNormalStyle}"
+                                            Content="&#xE74D;"
+                                            Command="{Binding RemoveLeftItem}"
+                                            Width="48" Height="48"
+                                            Visibility="{Binding LeftItem, Converter={StaticResource NullToVisibilityConverter}}" />
+                                        
+                                        <Button
+                                            Grid.Row="0" Grid.Column="7"
+                                            Style="{StaticResource NavigationBackButtonNormalStyle}"
+                                            Content="&#xE8AB;"
+                                            Command="{Binding Compare}"
+                                            Width="48" Height="48" />
+                                        
+                                        <Button
+                                            Grid.Row="0" Grid.Column="9"
+                                            Style="{StaticResource NavigationBackButtonNormalStyle}"
+                                            Content="&#xE74D;"
+                                            Command="{Binding RemoveRightItem}"
+                                            Width="48" Height="48"
+                                            Visibility="{Binding RightItem, Converter={StaticResource NullToVisibilityConverter}}" />
+
+                                        <!--
+                                        <Image
+                                            Grid.Row="0" Grid.Column="11"
+                                            Source="{Binding RightItem.Nation.Code, Converter={StaticResource NationCodeToFlagImagePathConverter}, ConverterParameter=32x32}"
+                                            Width="32" Height="32"
+                                            Visibility="{Binding RightItem, Converter={StaticResource NullToVisibilityConverter}}" />
+                                        -->
+                                        
+                                        <Grid
+                                            Grid.Row="0" Grid.Column="13"
+                                            Visibility="{Binding RightItem, Converter={StaticResource NullToVisibilityConverter}}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition>
+                                                    <RowDefinition.Height>
+                                                        <Binding Path="RightItem.FirstName">
+                                                            <Binding.Converter>
+                                                                <m:ConditionConverter Condition="==" OnRight="" IfTrue="Auto" IfFalse="*" />
+                                                            </Binding.Converter>
+                                                        </Binding>
+                                                    </RowDefinition.Height>
+                                                </RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock
+                                                Grid.Row="0" Grid.Column="0"
+                                                Text="{Binding RightItem.SecondName}"
+                                                HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                            <TextBlock
+                                                Grid.Row="1" Grid.Column="0"
+                                                Text="{Binding RightItem.FirstName}"
+                                                HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                Foreground="{StaticResource SystemControlForegroundBaseMediumBrush}"
+                                                Visibility="{Binding RelativeSource={RelativeSource Self}, Path=Text, Converter={StaticResource EmptyToVisibilityConverter}}" />
+                                        </Grid>
+                                        
+                                        <Button
+                                            Grid.Row="0" Grid.Column="14"
+                                            Style="{StaticResource NavigationBackButtonNormalStyle}"
+                                            Content="&#xE894;"
+                                            Command="{Binding Clear}"
+                                            Width="48" Height="48"
+                                            Margin="0,0,16,0"
+                                            HorizontalAlignment="Right" />
+
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    
+
+                </ResourceDictionary>
+                <ResourceDictionary Source="Sources/View/AppBarButton.xaml"        />
+                <ResourceDictionary Source="Sources/View/DataGrid.xaml"            />
+                <ResourceDictionary Source="Sources/View/GroupBoxControl.xaml"     />
+                <ResourceDictionary Source="Sources/View/NumberPickerControl.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

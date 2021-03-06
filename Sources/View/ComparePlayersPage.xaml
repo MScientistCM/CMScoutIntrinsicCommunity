@@ -1,0 +1,528 @@
+﻿<m:Page_
+    x:Class="CMScoutIntrinsic.ComparePlayersPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:m="using:CMScoutIntrinsic"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <Page.TopAppBar>
+        <CommandBar
+            HorizontalContentAlignment="Stretch"
+            IsDynamicOverflowEnabled="False"
+            x:Name="CommandBar">
+            <CommandBar.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <m:AppBarButton
+                        Grid.Row="0" Grid.Column="0"
+                        Icon="Back" Label="Back"
+                        IsCompact="{Binding ElementName=CommandBar, Path=IsOpen, Converter={StaticResource InverseBooleanConverter}}"
+                        Command="{Binding Back}" />
+                </Grid>
+            </CommandBar.Content>
+        </CommandBar>
+    </Page.TopAppBar>
+
+    <Grid
+        Background="{ThemeResource PageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <SolidColorBrush x:Key="LeftBrush"  Color="Green"  />
+            <SolidColorBrush x:Key="RightBrush" Color="Red"    />
+            <SolidColorBrush x:Key="SameBrush"  Color="Yellow" />
+
+            <Style x:Key="PlayerHeaderTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource SubtitleTextBlockStyle}">
+                <Setter Property="FontWeight" Value="SemiBold" />
+            </Style>
+            
+            <Style x:Key="PlayerSubheaderTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
+                <Setter Property="FontWeight" Value="SemiBold" />
+            </Style>
+            
+            <Style x:Key="AttributeNameTextBlockStyle" TargetType="TextBlock">
+            </Style>
+            
+            <Style x:Key="AttributeLeftValueTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Right" />
+                <Setter Property="Foreground"    Value="{StaticResource LeftBrush}" />
+            </Style>
+            <Style x:Key="AttributeRightValueTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Right" />
+                <Setter Property="Foreground"    Value="{StaticResource RightBrush}" />
+            </Style>
+            <Style x:Key="AttributeSameValueTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Right" />
+                <Setter Property="Foreground"    Value="{StaticResource SameBrush}" />
+            </Style>
+
+            <Style x:Key="AttributeValueRectangleStyle" TargetType="Rectangle">
+                <Setter Property="Width"               Value="24" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+            </Style>
+
+            <m:ComparePlayersToAttributeValueConverter x:Key="ComparePlayersToAttributeValueConverter" />
+
+            <m:ComparePlayersToAttributeValueBackgroundConverter
+                x:Key="ComparePlayersToAttributeValueBackgroundConverter"
+                LeftPlayer="{Binding LeftPlayer}"
+                RightPlayer="{Binding RightPlayer}"
+                HighlightBrush="#FFC0C0C0" />
+
+            <m:ComparePlayersToAttributeValueStyleConverter 
+                x:Key="ComparePlayersToAttributeValueStyleConverter"
+                LeftPlayer="{Binding LeftPlayer}"
+                RightPlayer="{Binding RightPlayer}"
+                LeftStyle="{StaticResource AttributeLeftValueTextBlockStyle}"
+                RightStyle="{StaticResource AttributeRightValueTextBlockStyle}"
+                SameStyle="{StaticResource AttributeSameValueTextBlockStyle}" />
+
+            <m:ConditionConverter x:Key="WindowsHeightToFullLayoutVisibilityConverter" Condition="&lt;" OnRight="743" IfTrue="Collapsed" IfFalse="Visible" />
+
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock 
+            Grid.Row="0" Grid.Column="0"
+            Text="{Binding LeftPlayer, Converter={StaticResource PlayerToHeaderStringConverter}}"
+            Style="{StaticResource PlayerHeaderTextBlockStyle}"
+            Foreground="{StaticResource LeftBrush}"
+            HorizontalAlignment="Center" />
+        <TextBlock 
+            Grid.Row="0" Grid.Column="1"
+            Text="{Binding RightPlayer, Converter={StaticResource PlayerToHeaderStringConverter}}"
+            Style="{StaticResource PlayerHeaderTextBlockStyle}"
+            Foreground="{StaticResource RightBrush}"
+            HorizontalAlignment="Center" />
+
+        <TextBlock 
+            Grid.Row="1" Grid.Column="0"
+            Text="{Binding LeftPlayer, Converter={StaticResource PlayerToSubheaderStringConverter}}"
+            Style="{StaticResource PlayerSubheaderTextBlockStyle}"
+            Foreground="{StaticResource LeftBrush}"
+            HorizontalAlignment="Center"
+            Margin="0,8,0,0"
+            Visibility="{Binding Source={StaticResource xStatic}, Path=App.WindowHeight, Converter={StaticResource WindowsHeightToFullLayoutVisibilityConverter}}" />
+        <TextBlock 
+            Grid.Row="1" Grid.Column="1"
+            Text="{Binding RightPlayer, Converter={StaticResource PlayerToSubheaderStringConverter}}"
+            Style="{StaticResource PlayerSubheaderTextBlockStyle}"
+            Foreground="{StaticResource RightBrush}"
+            HorizontalAlignment="Center"
+            Margin="0,8,0,0"
+            Visibility="{Binding Source={StaticResource xStatic}, Path=App.WindowHeight, Converter={StaticResource WindowsHeightToFullLayoutVisibilityConverter}}" />
+
+        <Grid
+            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            Padding="16"
+            Margin="0,8,0,0"
+            Background="#D3D3D3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="16" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid
+                Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="128" />
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition Width="64" />
+                    <ColumnDefinition Width="128" />
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition Width="64" />
+                    <ColumnDefinition Width="128" />
+                    <ColumnDefinition Width="48" />
+                </Grid.ColumnDefinitions>
+                            
+                <!-- 1st column -->
+                <Rectangle Grid.Row="0"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='18'}" />
+                <TextBlock Grid.Row="0"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[18].Name}"  />
+                <TextBlock Grid.Row="0"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='18'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='18'}" />
+
+                <Rectangle Grid.Row="1"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='33'}" />
+                <TextBlock Grid.Row="1"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[33].Name}"  />
+                <TextBlock Grid.Row="1"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='33'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='33'}" />
+
+                <Rectangle Grid.Row="2"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='19'}" />
+                <TextBlock Grid.Row="2"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[19].Name}"  />
+                <TextBlock Grid.Row="2"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='19'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='19'}" />
+                
+                <Rectangle Grid.Row="3"  Grid.Column="0" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="3"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='0'}" />
+                <TextBlock Grid.Row="3"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[0].Name}"   />
+                <TextBlock Grid.Row="3"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='0'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='0'}"  />
+
+                <Rectangle Grid.Row="4"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='20'}" />
+                <TextBlock Grid.Row="4"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[20].Name}"  />
+                <TextBlock Grid.Row="4"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='20'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='20'}" />
+
+                <Rectangle Grid.Row="5"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='35'}" />
+                <TextBlock Grid.Row="5"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[35].Name}"  />
+                <TextBlock Grid.Row="5"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='35'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='35'}" />
+                
+                <Rectangle Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="6"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='1'}" />
+                <TextBlock Grid.Row="6"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[1].Name}"   />
+                <TextBlock Grid.Row="6"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='1'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='1'}"  />
+                
+                <Rectangle Grid.Row="7"  Grid.Column="0" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="7"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='2'}" />
+                <TextBlock Grid.Row="7"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[2].Name}"   />
+                <TextBlock Grid.Row="7"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='2'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='2'}"  />
+                
+                <Rectangle Grid.Row="8"  Grid.Column="0" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="8"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='3'}" />
+                <TextBlock Grid.Row="8"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[3].Name}"   />
+                <TextBlock Grid.Row="8"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='3'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='3'}"  />
+
+                <Rectangle Grid.Row="9"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='37'}" />
+                <TextBlock Grid.Row="9"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[37].Name}"  />
+                <TextBlock Grid.Row="9"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='37'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='37'}" />
+                
+                <Rectangle Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="10" Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='4'}" />
+                <TextBlock Grid.Row="10" Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[4].Name}"   />
+                <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='4'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='4'}"  />
+                
+                <Rectangle Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="11" Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='5'}" />
+                <TextBlock Grid.Row="11" Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[5].Name}"   />
+                <TextBlock Grid.Row="11" Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='5'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='5'}"  />
+
+                <!-- 2nd column -->
+                <Rectangle Grid.Row="0"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='22'}" />
+                <TextBlock Grid.Row="0"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[22].Name}"  />
+                <TextBlock Grid.Row="0"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='22'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='22'}" />
+                
+                <Rectangle Grid.Row="1"  Grid.Column="3" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="1"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='15'}" />
+                <TextBlock Grid.Row="1"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[15].Name}"  />
+                <TextBlock Grid.Row="1"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='15'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='15'}" />
+                
+                <Rectangle Grid.Row="2"  Grid.Column="3" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="2"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='6'}" />
+                <TextBlock Grid.Row="2"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[6].Name}"   />
+                <TextBlock Grid.Row="2"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='6'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='6'}"  />
+
+                <Rectangle Grid.Row="3"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='40'}" />
+                <TextBlock Grid.Row="3"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[40].Name}"  />
+                <TextBlock Grid.Row="3"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='40'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='40'}" />
+
+                <Rectangle Grid.Row="4"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='24'}" />
+                <TextBlock Grid.Row="4"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[24].Name}"  />
+                <TextBlock Grid.Row="4"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='24'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='24'}" />
+                
+                <Rectangle Grid.Row="5"  Grid.Column="3" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="5"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='7'}" />
+                <TextBlock Grid.Row="5"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[7].Name}"   />
+                <TextBlock Grid.Row="5"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='7'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='7'}"  />
+                
+                <Rectangle Grid.Row="6"  Grid.Column="3" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="6"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='8'}" />
+                <TextBlock Grid.Row="6"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[8].Name}"   />
+                <TextBlock Grid.Row="6"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='8'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='8'}"  />
+                
+                <Rectangle Grid.Row="7"  Grid.Column="3" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="7"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='9'}" />
+                <TextBlock Grid.Row="7"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[9].Name}"   />
+                <TextBlock Grid.Row="7"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='9'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='9'}"  />
+
+                <Rectangle Grid.Row="8"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='26'}" />
+                <TextBlock Grid.Row="8"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[26].Name}"  />
+                <TextBlock Grid.Row="8"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='26'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='26'}" />
+                
+                <Rectangle Grid.Row="9"  Grid.Column="3" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="9"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='10'}" />
+                <TextBlock Grid.Row="9"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[10].Name}"  />
+                <TextBlock Grid.Row="9"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='10'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='10'}" />
+                
+                <Rectangle Grid.Row="10" Grid.Column="3" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="10" Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='12'}" />
+                <TextBlock Grid.Row="10" Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[12].Name}"  />
+                <TextBlock Grid.Row="10" Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='12'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='12'}" />
+                
+                <Rectangle Grid.Row="11" Grid.Column="3" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="11" Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='17'}" />
+                <TextBlock Grid.Row="11" Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[17].Name}"  />
+                <TextBlock Grid.Row="11" Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='17'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='17'}" />
+
+                <!-- 3rd column -->
+                <Rectangle Grid.Row="0"  Grid.Column="7" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='27'}" />
+                <TextBlock Grid.Row="0"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[27].Name}"  />
+                <TextBlock Grid.Row="0"  Grid.Column="7" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='27'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='27'}" />
+
+                <Rectangle Grid.Row="1"  Grid.Column="7" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='28'}" />
+                <TextBlock Grid.Row="1"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[28].Name}"  />
+                <TextBlock Grid.Row="1"  Grid.Column="7" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='28'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='28'}" />
+
+                <Rectangle Grid.Row="2"  Grid.Column="7" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='29'}" />
+                <TextBlock Grid.Row="2"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[29].Name}"  />
+                <TextBlock Grid.Row="2"  Grid.Column="7" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='29'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='29'}" />
+                
+                <Rectangle Grid.Row="3"  Grid.Column="6" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="3"  Grid.Column="7" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='13'}" />
+                <TextBlock Grid.Row="3"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[13].Name}"  />
+                <TextBlock Grid.Row="3"  Grid.Column="7" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='13'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='13'}" />
+
+                <Rectangle Grid.Row="4"  Grid.Column="7" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='45'}" />
+                <TextBlock Grid.Row="4"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[45].Name}"  />
+                <TextBlock Grid.Row="4"  Grid.Column="7" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='45'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='45'}" />
+
+                <Rectangle Grid.Row="5"  Grid.Column="7" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='30'}" />
+                <TextBlock Grid.Row="5"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[30].Name}"  />
+                <TextBlock Grid.Row="5"  Grid.Column="7" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='30'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='30'}" />
+
+                <Rectangle Grid.Row="6"  Grid.Column="7" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='31'}" />
+                <TextBlock Grid.Row="6"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[31].Name}"  />
+                <TextBlock Grid.Row="6"  Grid.Column="7" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='31'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='31'}" />
+
+                <!--
+                <TextBlock Grid.Row="8"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Right Foot"              />
+                <TextBlock Grid.Row="8"  Grid.Column="7" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding RightFoot}"     />
+                <TextBlock Grid.Row="9"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Left Foot"               />
+                <TextBlock Grid.Row="9"  Grid.Column="7" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding LeftFoot}"      />
+                -->
+            </Grid>
+
+            <Grid
+                Grid.Row="2" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="128" />
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition Width="64" />
+                    <ColumnDefinition Width="128" />
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition Width="64" />
+                    <ColumnDefinition Width="128" />
+                    <ColumnDefinition Width="48" />
+                </Grid.ColumnDefinitions>
+
+                <!-- 1st column -->
+                <Rectangle Grid.Row="0"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='32'}" />
+                <TextBlock Grid.Row="0"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[32].Name}"  />
+                <TextBlock Grid.Row="0"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='32'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='32'}" />
+
+                <Rectangle Grid.Row="1"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='34'}" />
+                <TextBlock Grid.Row="1"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[34].Name}"  />
+                <TextBlock Grid.Row="1"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='34'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='34'}" />
+
+                <Rectangle Grid.Row="2"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='36'}" />
+                <TextBlock Grid.Row="2"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[36].Name}"  />
+                <TextBlock Grid.Row="2"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='36'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='36'}" />
+
+                <Rectangle Grid.Row="3"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='21'}" />
+                <TextBlock Grid.Row="3"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[21].Name}"  />
+                <TextBlock Grid.Row="3"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='21'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='21'}" />
+
+                <Rectangle Grid.Row="4"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='38'}" />
+                <TextBlock Grid.Row="4"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[38].Name}"  />
+                <TextBlock Grid.Row="4"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='38'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='38'}" />
+
+                <Rectangle Grid.Row="5"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='39'}" />
+                <TextBlock Grid.Row="5"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[39].Name}"  />
+                <TextBlock Grid.Row="5"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='39'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='39'}" />
+
+                <Rectangle Grid.Row="6"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='23'}" />
+                <TextBlock Grid.Row="6"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[23].Name}"  />
+                <TextBlock Grid.Row="6"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='23'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='23'}" />
+
+                <Rectangle Grid.Row="7"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='41'}" />
+                <TextBlock Grid.Row="7"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[41].Name}"  />
+                <TextBlock Grid.Row="7"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='41'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='41'}" />
+
+                <Rectangle Grid.Row="8"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='25'}" />
+                <TextBlock Grid.Row="8"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[25].Name}"  />
+                <TextBlock Grid.Row="8"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='25'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='25'}" />
+                
+                <Rectangle Grid.Row="9"  Grid.Column="0" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="9"  Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='16'}" />
+                <TextBlock Grid.Row="9"  Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[16].Name}"  />
+                <TextBlock Grid.Row="9"  Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='16'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='16'}" />
+                
+                <Rectangle Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="10" Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='11'}" />
+                <TextBlock Grid.Row="10" Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[11].Name}"  />
+                <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='11'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='11'}" />
+
+                <Rectangle Grid.Row="11" Grid.Column="1" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='42'}" />
+                <TextBlock Grid.Row="11" Grid.Column="0" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[42].Name}"  />
+                <TextBlock Grid.Row="11" Grid.Column="1" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='42'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='42'}" />
+                            
+                <!-- 2nd column -->
+                <Rectangle Grid.Row="0"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='43'}" />
+                <TextBlock Grid.Row="0"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[43].Name}"  />
+                <TextBlock Grid.Row="0"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='43'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='43'}" />
+
+                <Rectangle Grid.Row="1"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='44'}" />
+                <TextBlock Grid.Row="1"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[44].Name}"  />
+                <TextBlock Grid.Row="1"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='44'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='44'}" />
+
+                <Rectangle Grid.Row="2"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='46'}" />
+                <TextBlock Grid.Row="2"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[46].Name}"  />
+                <TextBlock Grid.Row="2"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='46'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='46'}" />
+                
+                <Rectangle Grid.Row="3"  Grid.Column="3" Grid.ColumnSpan="2" Fill="{StaticResource CA18HighlightBackground}" Visibility="{Binding CA18Highlight, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Rectangle Grid.Row="3"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='14'}" />
+                <TextBlock Grid.Row="3"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[14].Name}"  />
+                <TextBlock Grid.Row="3"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='14'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='14'}" />
+
+                <Rectangle Grid.Row="4"  Grid.Column="4" Style="{StaticResource AttributeValueRectangleStyle}" Fill="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueBackgroundConverter}, ConverterParameter='47'}" />
+                <TextBlock Grid.Row="4"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="{Binding Attributes[47].Name}"  />
+                <TextBlock Grid.Row="4"  Grid.Column="4" Text="{Binding Converter={StaticResource ComparePlayersToAttributeValueConverter}, ConverterParameter='47'}" Style="{Binding SelectedRatingPosition, Converter={StaticResource ComparePlayersToAttributeValueStyleConverter}, ConverterParameter='47'}" />
+
+                <!--
+                <TextBlock Grid.Row="6"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Current Ability"             />
+                <TextBlock Grid.Row="6"  Grid.Column="4" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding CurrentAbility}"    />
+                <TextBlock Grid.Row="7"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Potential Ability"           />
+                <TextBlock Grid.Row="7"  Grid.Column="4" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding PotentialAbility}"  />
+
+                <TextBlock Grid.Row="9"  Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Current Reputation"          />
+                <TextBlock Grid.Row="9"  Grid.Column="4" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding CurrentReputation}" />
+                <TextBlock Grid.Row="10" Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Home Reputation"             />
+                <TextBlock Grid.Row="10" Grid.Column="4" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding HomeReputation}"    />
+                <TextBlock Grid.Row="11" Grid.Column="3" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="World Reputation"            />
+                <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding WorldReputation}"   />
+                -->
+                            
+                <!-- 3rd column -->
+                <!--
+                <TextBlock Grid.Row="0"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Right Side"                    />
+                <TextBlock Grid.Row="0"  Grid.Column="7" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding RightSide}"           />
+                <TextBlock Grid.Row="1"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Left Side"                     />
+                <TextBlock Grid.Row="1"  Grid.Column="7" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding LeftSide}"            />
+                <TextBlock Grid.Row="2"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Centre Side"                   />
+                <TextBlock Grid.Row="2"  Grid.Column="7" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding CentreSide}"          />
+
+                <TextBlock Grid.Row="4"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Goalkeeper"                    />
+                <TextBlock Grid.Row="4"  Grid.Column="7" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding Goalkeeper}"          />
+                <TextBlock Grid.Row="5"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Sweeper"                       />
+                <TextBlock Grid.Row="5"  Grid.Column="7" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding Sweeper}"             />
+                <TextBlock Grid.Row="6"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Defender"                      />
+                <TextBlock Grid.Row="6"  Grid.Column="7" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding Defender}"            />
+                <TextBlock Grid.Row="7"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Defensive Midfielder"          />
+                <TextBlock Grid.Row="7"  Grid.Column="7" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding DefensiveMidfielder}" />
+                <TextBlock Grid.Row="8"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Attacking Midfielder"          />
+                <TextBlock Grid.Row="8"  Grid.Column="7" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding AttackingMidfielder}" />
+                <TextBlock Grid.Row="9"  Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Attacker"                      />
+                <TextBlock Grid.Row="9"  Grid.Column="7" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding Attacker}"            />
+                <TextBlock Grid.Row="10" Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Wing Back"                     />
+                <TextBlock Grid.Row="10" Grid.Column="7" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding WingBack}"            />
+                <TextBlock Grid.Row="11" Grid.Column="6" Style="{StaticResource AttributeNameTextBlockStyle}"  Text="Free Role"                     />
+                <TextBlock Grid.Row="11" Grid.Column="7" Style="{StaticResource AttributeValueTextBlockStyle}" Text="{Binding FreeRole}"            />
+                -->
+            </Grid>
+        </Grid>
+
+        <TextBlock 
+            Grid.Row="3" Grid.Column="0"
+            Text="{Binding LeftPlayer, Converter={StaticResource PlayerToPositionStringConverter}}"
+            Style="{StaticResource PlayerSubheaderTextBlockStyle}"
+            Foreground="{StaticResource LeftBrush}"
+            HorizontalAlignment="Center"
+            Margin="0,8,0,0"
+            Visibility="{Binding Source={StaticResource xStatic}, Path=App.WindowHeight, Converter={StaticResource WindowsHeightToFullLayoutVisibilityConverter}}" />
+
+        <TextBlock 
+            Grid.Row="3" Grid.Column="1"
+            Text="{Binding RightPlayer, Converter={StaticResource PlayerToPositionStringConverter}}"
+            Style="{StaticResource PlayerSubheaderTextBlockStyle}"
+            Foreground="{StaticResource RightBrush}"
+            HorizontalAlignment="Center"
+            Margin="0,8,0,0"
+            Visibility="{Binding Source={StaticResource xStatic}, Path=App.WindowHeight, Converter={StaticResource WindowsHeightToFullLayoutVisibilityConverter}}" />
+
+        <m:GroupBoxControl
+            Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+            Header="Rating"
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            Margin="0,8,0,0">
+            <ItemsControl
+                ItemsSource="{Binding RatingPositions}"
+                Margin="-4,0,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ToggleButton
+                            IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                            Content="{Binding Item.Code}"
+                            Padding="0"
+                            Width="32" Height="32"
+                            Margin="4,0,0,0" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </m:GroupBoxControl>
+
+        <TextBlock
+            Grid.Row="4" Grid.Column="0"
+            Text="{Binding LeftPlayer.Rating.Value, Converter={StaticResource Double2Converter}}"
+            Style="{StaticResource PlayerSubheaderTextBlockStyle}"
+            Foreground="{StaticResource LeftBrush}"
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            Margin="0,8,0,0" />
+        <TextBlock
+            Grid.Row="4" Grid.Column="1"
+            Text="{Binding RightPlayer.Rating.Value, Converter={StaticResource Double2Converter}}"
+            Style="{StaticResource PlayerSubheaderTextBlockStyle}"
+            Foreground="{StaticResource RightBrush}"
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            Margin="0,8,0,0" />
+
+    </Grid>
+</m:Page_>

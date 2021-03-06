@@ -1,0 +1,53 @@
+Default
+                    GK     D    DM     M    AM     A    WB
+
+Anticipation         4     8     8     4     1     1     2
+Creativity           0     0     0     8     8     1     2
+Crossing             0     0     0     0     1     0    16
+Decisions            0     1     2     4     4     1     2
+Dribbling            0     0     0     1     2     2    16
+Finishing            0     0     0     0     2    16     1
+Heading              0     4     1     1     1     8     1
+Long Shots           0     0     1     1     2     1     1
+Marking              0     8     4     1     0     0     0
+Off The Ball         0     0     0    16    16    16     4
+Passing              0     0     2    16    16     1     2
+Penalties            0     0     0     0     0     0     0
+Positioning          8    16    16     2     0     0     0
+Tackling             0    16     8     2     0     0     0
+Throw Ins            0     1     0     0     0     0     0
+Handling            16     0     0     0     0     0     0
+One On Ones          8     0     0     0     0     0     0
+Reflexes            16     0     0     0     0     0     0
+
+Acceleration         2     2     2     2     4     4     8
+Agility              8     1     1     0     2     2     4
+Balance              2     2     4     1     1     2     1
+Corners              0     0     0     0     0     0     0
+Flair                0     0     0     1     8     4     4
+Injury Proneness     0     0     0     0     0     0     0
+Jumping              4     8     1     1     1     8     1
+Natural Fitness      0     0     0     0     0     0     0
+Pace                 2     2     2     2     4     4     8
+Set Pieces           0     0     0     0     0     0     0
+Stamina              0     1     0     0     0     0     0
+Strength             0     4     4     1     1     2     1
+Technique            0     0     1     8     8     8     8
+Work Rate            0     1    16     4     1     1     1
+
+Adaptability         0     0     0     0     0     0     0
+Aggression           0     1     1     0     0     0     0
+Ambition             0     0     0     0     0     0     0
+Bravery              4     2     1     0     0     1     0
+Consistency          4     4     4     4     4     4     4
+Determination        8     8     8     8     8     8     8
+Dirtiness            0     1     1     0     0     0     0
+Important Matches    2     1     0     0     0     0     0
+Influence            0     0     0     0     0     0     0
+Loyality             0     0     0     0     0     0     0
+Pressure             0     0     0     0     0     0     0
+Professionalism      0     0     0     0     0     0     0
+Sportsmanship        0     0     0     0     0     0     0
+Teamwork             0     4     8     8     1     1     1
+Temperament          0     0     0     0     0     0     0
+Versatility          0     0     0     0     0     0     0

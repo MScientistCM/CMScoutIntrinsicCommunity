@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{27BB04C0-33CD-4E0A-8235-6DA0ED7F9DF7}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CMScoutIntrinsic</RootNamespace>
+    <AssemblyName>CMScoutIntrinsic</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
+    <PackageCertificateKeyFile>CMScoutIntrinsic_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>84F8C977EC344128BAD27434C8278B7368C4DE66</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Never</AppxBundle>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppInstallerUpdateFrequency>1</AppInstallerUpdateFrequency>
+    <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32_altform-unplated.png" />
+    <Content Include="Assets\Square71x71Logo.scale-100.png" />
+    <Content Include="Assets\Square71x71Logo.scale-200.png" />
+    <Content Include="Assets\Square71x71Logo.scale-400.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" />
+    <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <None Include="CMScoutIntrinsic_StoreKey.pfx" />
+    <None Include="Package.xml" />
+    <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Resources\Libra.scale-100.png" />
+    <Content Include="Resources\Libra.scale-200.png" />
+    <Content Include="Resources\Libra.scale-400.png" />
+    <Content Include="Resources\MicrosoftStore.scale-100.png" />
+    <Content Include="Resources\MicrosoftStore.scale-200.png" />
+    <Content Include="Resources\MicrosoftStore.scale-400.png" />
+    <Content Include="Resources\WeightsSet_CMScout.txt" />
+    <Content Include="Resources\WeightsSet_Default.txt" />
+    <None Include="project.json" />
+    <Content Include="Resources\Fonts\DroidSansMono.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\Common\Helpers.cs" />
+    <Compile Include="Sources\Model\DataService.cs" />
+    <Compile Include="Sources\Model\LocalizationService.cs" />
+    <Compile Include="Sources\Model\NavigationService.cs" />
+    <Compile Include="Sources\Model\ObservableCollectionEx.cs" />
+    <Compile Include="Sources\Model\Pair.cs" />
+    <Compile Include="Sources\Model\SettingsService.cs" />
+    <Compile Include="Sources\Model\TimeWatch.cs" />
+    <Compile Include="Sources\ViewModel\AboutViewModel.cs" />
+    <Compile Include="Sources\ViewModel\ComparePlayersViewModel.cs" />
+    <Compile Include="Sources\ViewModel\DataServiceVM.cs" />
+    <Compile Include="Sources\ViewModel\DialogViewModelBase.cs" />
+    <Compile Include="Sources\ViewModel\FiltersViewModel.cs" />
+    <Compile Include="Sources\ViewModel\ListCollectionViewSource.cs" />
+    <Compile Include="Sources\ViewModel\MainViewModel.cs" />
+    <Compile Include="Sources\ViewModel\NotifyPropertyChangedBase.cs" />
+    <Compile Include="Sources\ViewModel\LoadViewModel.cs" />
+    <Compile Include="Sources\ViewModel\OpenViewModel.cs" />
+    <Compile Include="Sources\ViewModel\PageViewModelBase.cs" />
+    <Compile Include="Sources\ViewModel\QuickFilterViewModel.cs" />
+    <Compile Include="Sources\ViewModel\RadioButtonGroupVM.cs" />
+    <Compile Include="Sources\ViewModel\RateAppSuggestionViewModel.cs" />
+    <Compile Include="Sources\ViewModel\RatingsCalculationViewModel.cs" />
+    <Compile Include="Sources\ViewModel\RelayCommand.cs" />
+    <Compile Include="Sources\ViewModel\SettingsViewModel.cs" />
+    <Compile Include="Sources\ViewModel\ViewModelBase.cs" />
+    <Compile Include="Sources\ViewModel\WeightsViewModel.cs" />
+    <Compile Include="Sources\View\AppBarButton.xaml.cs">
+      <DependentUpon>AppBarButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\View\Behaviors.cs" />
+    <Compile Include="Sources\View\ComparePlayersPage.xaml.cs">
+      <DependentUpon>ComparePlayersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\View\Converters.cs" />
+    <Compile Include="Sources\View\DataGrid.xaml.cs">
+      <DependentUpon>DataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\View\GroupBoxControl.xaml.cs">
+      <DependentUpon>GroupBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\View\Localization.cs" />
+    <Compile Include="Sources\View\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sources\View\MultiBinding.cs" />
+    <Compile Include="Sources\View\Navigation.cs" />
+    <Compile Include="Sources\View\LoadDialog.xaml.cs">
+      <DependentUpon>LoadDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\View\NumberPickerControl.xaml.cs">
+      <DependentUpon>NumberPickerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\View\Properties.cs" />
+    <Compile Include="Sources\View\RateAppSuggestionDialog.xaml.cs">
+      <DependentUpon>RateAppSuggestionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\View\RatingsCalculationDialog.xaml.cs">
+      <DependentUpon>RatingsCalculationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\View\xStatic.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Sources\View\AppBarButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sources\View\ComparePlayersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sources\View\DataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sources\View\GroupBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sources\View\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Sources\View\LoadDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sources\View\NumberPickerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sources\View\RateAppSuggestionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sources\View\RatingsCalculationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

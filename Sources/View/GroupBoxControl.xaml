@@ -1,0 +1,38 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:m="using:CMScoutIntrinsic">
+
+    <Style TargetType="m:GroupBoxControl">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment"   Value="Top" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="m:GroupBoxControl">
+                    <Grid>
+                        <Path
+                            x:Name="Path"
+                            StrokeThickness="2"
+                            Stroke="Silver" />
+                        <Grid
+                            Name="Header"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="8,0"
+                            Padding="4,0">
+                            <TextBlock
+                                Text="{TemplateBinding Header}" />
+                        </Grid>
+                        <ContentPresenter
+                            x:Name="ContentPresenter"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            ContentTransitions="{TemplateBinding ContentTransitions}"
+                            Content="{TemplateBinding Content}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

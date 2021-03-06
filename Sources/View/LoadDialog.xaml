@@ -1,0 +1,38 @@
+﻿<ContentDialog
+    x:Class="CMScoutIntrinsic.LoadDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:m="using:CMScoutIntrinsic"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="{Binding File.Name, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}Loading {0}...'}">
+    <ContentDialog.PrimaryButtonText>
+        <Binding Path="ErrorMessage">
+            <Binding.Converter>
+                <m:ConditionConverter Condition="==" OnRight="{x:Null}" IfTrue="" IfFalse="OK" />
+            </Binding.Converter>
+        </Binding>
+    </ContentDialog.PrimaryButtonText>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <ProgressBar
+            Grid.Row="0" Grid.Column="0"
+            IsIndeterminate="True"
+            Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        
+        <TextBlock
+            Grid.Row="1" Grid.Column="0"
+            Text="{Binding ErrorMessage}"
+            Visibility="{Binding ErrorMessage, Converter={StaticResource NullToVisibilityConverter}}"
+            HorizontalAlignment="Center" />
+    </Grid>
+</ContentDialog>
