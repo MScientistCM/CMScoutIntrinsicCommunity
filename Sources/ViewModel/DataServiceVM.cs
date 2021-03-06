@@ -255,7 +255,8 @@ namespace CMScoutIntrinsic {
         public String FirstNationNationality  => !String.IsNullOrEmpty(Value.FirstNation?.Nationality)  ? Value.FirstNation.Nationality  : String.Empty;
         public String SecondNationNationality => !String.IsNullOrEmpty(Value.SecondNation?.Nationality) ? Value.SecondNation.Nationality : String.Empty;
         public String ClubName                => !String.IsNullOrEmpty(Value.ClubJob?.Name)             ? Value.ClubJob.Name             : String.Empty;
-        public String ClubShortName           => !String.IsNullOrEmpty(Value.ClubJob?.Name)             ? Value.ClubJob.ShortName        : String.Empty;
+        public String ClubShortName           => !String.IsNullOrEmpty(Value.ClubJob?.ShortName)        ? Value.ClubJob.ShortName        : String.Empty;
+        public String ClubNationCode          => !String.IsNullOrEmpty(Value.ClubJob?.Nation?.Code)     ? Value.ClubJob.Nation.Code      : String.Empty;
 
         public DateTime?    DateOfBirth    => Value.DateOfBirth;
         public Int32?       Age            => Value.Age;
@@ -271,7 +272,9 @@ namespace CMScoutIntrinsic {
                     ca18ViewMode == CA18ViewMode.Intrinsic            ? Value.AttributeValues[i].Intrinsic            :
                     ca18ViewMode == CA18ViewMode.IntrinsicGraemeKelly ? Value.AttributeValues[i].IntrinsicGraemeKelly :
                     ca18ViewMode == CA18ViewMode.IntrinsicNormalized  ? Value.AttributeValues[i].IntrinsicNormalized  :
-                                                                        Value.AttributeValues[i].InGame
+                    ca18ViewMode == CA18ViewMode.InGame               ? Value.AttributeValues[i].InGame               :
+                    ca18ViewMode == CA18ViewMode.InMatch              ? Value.AttributeValues[i].InMatch              :
+                                                                        Value.AttributeValues[i].InMatchNormalized
                 );
             }
         }
@@ -351,6 +354,18 @@ namespace CMScoutIntrinsic {
 
         public RatingVM[] Ratings { get; }
         public RatingVM   Rating  { get; private set; }
+
+        public Boolean IsFavorite {
+            get {
+                return Value.IsFavorite;
+            }
+
+            set {
+                Value.IsFavorite = value;
+
+                RaisePropertyChanged();
+            }
+        }
 
         public void UpdateRatings() {
             for(Int32 i = 0; i < Ratings.Length; ++i) {
@@ -540,12 +555,12 @@ namespace CMScoutIntrinsic {
             Weights = new WeightVM[Value.Weights.Length][];
 
             for(Int32 i = 0; i < Value.Weights.Length; ++i) {
-                Byte[] weights = Value.Weights[i];
+                UInt16[] weights = Value.Weights[i];
 
                 Weights[i] = new WeightVM[weights.Length];
 
                 for(Int32 j = 0; j < weights.Length; ++j) {
-                    Byte weight = weights[j];
+                    UInt16 weight = weights[j];
 
                     WeightVM weightVM = new WeightVM();
 

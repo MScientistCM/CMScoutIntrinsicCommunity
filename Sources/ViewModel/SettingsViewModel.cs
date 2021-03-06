@@ -59,7 +59,9 @@ namespace CMScoutIntrinsic {
                     CA18ViewMode.Intrinsic,
                     CA18ViewMode.IntrinsicGraemeKelly,
                     CA18ViewMode.IntrinsicNormalized,
-                    CA18ViewMode.InGame
+                    CA18ViewMode.InGame,
+                    CA18ViewMode.InMatch,
+                    CA18ViewMode.InMatchNormalized
                 },
                 CA18ViewMode,
                 false

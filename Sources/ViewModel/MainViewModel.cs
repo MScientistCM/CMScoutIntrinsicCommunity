@@ -16,6 +16,7 @@ namespace CMScoutIntrinsic {
             OpenViewModel              = new OpenViewModel();
             FiltersViewModel           = new FiltersViewModel();
             WeightsViewModel           = new WeightsViewModel();
+            FavoritesViewModel         = new FavoritesViewModel(this);
             SettingsViewModel          = new SettingsViewModel();
             AboutViewModel             = new AboutViewModel();
             QuickFilterViewModel       = new QuickFilterViewModel();
@@ -29,6 +30,9 @@ namespace CMScoutIntrinsic {
 
             FiltersViewModel.FilterApplied             += OnFilterApplied;
             WeightsViewModel.WeightsSetApplied         += OnWeightsSetApplied;
+            FavoritesViewModel.FavoritesFilterApplied  += OnFavoritesFilterApplied;
+            FavoritesViewModel.FavoritesLoaded         += OnFavoritesLoaded;
+            FavoritesViewModel.FavoritesChanged        += OnFavoritesChanged;
             QuickFilterViewModel.RatingPositionChanged += OnOnRatingPositionChanged;
             QuickFilterViewModel.FilterChanged         += OnQuickFilterChanged;
 
@@ -56,6 +60,7 @@ namespace CMScoutIntrinsic {
         public OpenViewModel        OpenViewModel              { get; }
         public FiltersViewModel     FiltersViewModel           { get; }
         public WeightsViewModel     WeightsViewModel           { get; }
+        public FavoritesViewModel   FavoritesViewModel         { get; }
         public SettingsViewModel    SettingsViewModel          { get; }
         public AboutViewModel       AboutViewModel             { get; }
         public QuickFilterViewModel QuickFilterViewModel       { get; }
@@ -113,6 +118,19 @@ namespace CMScoutIntrinsic {
                     _weights = new RelayCommand(
                         param => {
                             WeightsViewModel.IsOpened = true;
+                        },
+                        param => true
+                    )
+                );
+            }
+        }
+
+        public ICommand Favorites {
+            get {
+                return _favorites ?? (
+                    _favorites = new RelayCommand(
+                        param => {
+                            FavoritesViewModel.IsOpened = true;
                         },
                         param => true
                     )
@@ -326,8 +344,31 @@ namespace CMScoutIntrinsic {
             ApplyFilter(FiltersViewModel.SelectedFilter.Value);
         }
 
+        private void OnFavoritesFilterApplied(Object sender, EventArgs args) {
+            ApplyFavoritesFilter();
+        }
+
+        private void OnFavoritesLoaded(Object sender, EventArgs args) {
+            ApplyFavoritesFilter();
+        }
+
+        private void OnFavoritesChanged(Object sender, EventArgs args) {
+            if(QuickFilterViewModel.AppliedFilterName == "Favorite Players") {
+                ApplyFavoritesFilter();
+            }
+        }
+
+        private void ApplyFavoritesFilter() {
+            Filter filter = new Filter();
+
+            filter.IsFavorite = true;
+            filter.Name       = "Favorite Players";
+
+            ApplyFilter(filter);
+        }
+
         private void ApplyFilter(Filter filter) {
-            App app = (App) Application.Current;
+            App app = (App)Application.Current;
 
             _players.Source.Clear();
 
@@ -348,7 +389,7 @@ namespace CMScoutIntrinsic {
             _players.Refresh();
             RaisePropertyChanged(nameof(PlayersCount));
 
-            QuickFilterViewModel.UpdateAppliedFilterName(FiltersViewModel.SelectedFilter.Name);
+            QuickFilterViewModel.UpdateAppliedFilterName(filter.Name);
         }
 
         private async void OnWeightsSetApplied(Object sender, EventArgs args) {
@@ -383,6 +424,12 @@ namespace CMScoutIntrinsic {
 
         private Boolean ShowPlayer(CMStaff player, Filter filter) {
             App app = (App)Application.Current;
+
+            if(filter.IsFavorite) {
+                if(!player.IsFavorite) {
+                    return false;
+                }
+            }
 
             if(player.Age != null) {
                 if(filter.AgeFrom != 0 && player.Age < filter.AgeFrom) {
@@ -576,7 +623,7 @@ namespace CMScoutIntrinsic {
             }
 
             for(Int32 i = 0; i < player.AttributeValues.Length; ++i) {
-                SByte v = player.AttributeValues[i].IntrinsicNormalized;
+                SByte v = player.AttributeValues[i].InMatchNormalized;
 
                 if(DataService.Attributes[i].IsLessBetter) {
                     v = (SByte)(21 - v);
@@ -757,10 +804,10 @@ namespace CMScoutIntrinsic {
             else if(columnName == "Age") {
                 comparison = (a, b) => Helpers.CompareNullable(a.Age, b.Age);
             }
-            else if(columnName == "CurrentAbility") {
+            else if(columnName == "Current Ability") {
                 comparison = (a, b) => a.CurrentAbility.CompareTo(b.CurrentAbility);
             }
-            else if(columnName == "PotentialAbility") {
+            else if(columnName == "Potential Ability") {
                 comparison = (a, b) => a.PotentialAbility.CompareTo(b.PotentialAbility);
             }
             else if(columnName == "Value") {
@@ -792,7 +839,7 @@ namespace CMScoutIntrinsic {
             else if((match = Regex.Match(columnName, "Attribute(\\d+)")).Success) {
                 Int32 i = Int32.Parse(match.Groups[1].Value);
 
-                comparison = (a, b) => a.Value.AttributeValues[i].Intrinsic.CompareTo(b.Value.AttributeValues[i].Intrinsic);
+                comparison = (a, b) => a.Value.AttributeValues[i].InMatch.CompareTo(b.Value.AttributeValues[i].InMatch);
             }
             else {
                 throw new Exception(String.Format("Cannot compare column with name \"{0}\"", columnName));
@@ -875,6 +922,7 @@ namespace CMScoutIntrinsic {
         private RelayCommand                        _reload;
         private RelayCommand                        _filters;
         private RelayCommand                        _weights;
+        private RelayCommand                        _favorites;
         private RelayCommand                        _settings;
         private RelayCommand                        _about;
         private ListCollectionViewSource<CMStaffVM> _players;

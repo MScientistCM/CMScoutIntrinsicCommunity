@@ -114,6 +114,7 @@
     <Content Include="Assets\StoreLogo.scale-400.png" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Resources\WeightsSet_MadScientist.txt" />
     <None Include="CMScoutIntrinsic_StoreKey.pfx" />
     <None Include="Package.xml" />
     <None Include="Package.StoreAssociation.xml" />
@@ -133,6 +134,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sources\Common\Helpers.cs" />
+    <Compile Include="Sources\Model\CMBinaryReader.cs" />
     <Compile Include="Sources\Model\DataService.cs" />
     <Compile Include="Sources\Model\LocalizationService.cs" />
     <Compile Include="Sources\Model\NavigationService.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Sources\ViewModel\ComparePlayersViewModel.cs" />
     <Compile Include="Sources\ViewModel\DataServiceVM.cs" />
     <Compile Include="Sources\ViewModel\DialogViewModelBase.cs" />
+    <Compile Include="Sources\ViewModel\FavoritesViewModel.cs" />
     <Compile Include="Sources\ViewModel\FiltersViewModel.cs" />
     <Compile Include="Sources\ViewModel\ListCollectionViewSource.cs" />
     <Compile Include="Sources\ViewModel\MainViewModel.cs" />

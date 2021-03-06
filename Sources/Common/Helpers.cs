@@ -12,6 +12,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.System;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -206,6 +207,12 @@ namespace CMScoutIntrinsic {
 
         public static async void InvokeInBackgroundThreadAsync(Action action) {
             await Task.Run(action);
+        }
+
+
+
+        public static Boolean IsAltKeyPressed() {
+            return Window.Current.CoreWindow.GetKeyState(VirtualKey.Menu).HasFlag(CoreVirtualKeyStates.Down);
         }
 
 

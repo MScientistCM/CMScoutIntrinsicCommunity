@@ -6,10 +6,11 @@ using Windows.UI.Xaml.Controls;
 namespace CMScoutIntrinsic {
 
     sealed class NumberPickerControl : ContentControl {
-        public static readonly DependencyProperty FromProperty            = DependencyProperty.Register("From",            typeof(Int32), typeof(NumberPickerControl), new PropertyMetadata(0,     OnFromChanged));
-        public static readonly DependencyProperty ToProperty              = DependencyProperty.Register("To",              typeof(Int32), typeof(NumberPickerControl), new PropertyMetadata(0,     OnToChanged));
-        public static readonly DependencyProperty SelectedNumberProperty  = DependencyProperty.Register("SelectedNumber",  typeof(Int32), typeof(NumberPickerControl), new PropertyMetadata(0,     OnSelectedNumberChanged));
-        public static readonly DependencyProperty HideSignButtonsProperty = DependencyProperty.Register("HideSignButtons", typeof(Int32), typeof(NumberPickerControl), new PropertyMetadata(false, OnHideSignButtonsChanged));
+        public static readonly DependencyProperty FromProperty              = DependencyProperty.Register("From",              typeof(Int32),  typeof(NumberPickerControl), new PropertyMetadata(0,     OnFromChanged));
+        public static readonly DependencyProperty ToProperty                = DependencyProperty.Register("To",                typeof(Int32),  typeof(NumberPickerControl), new PropertyMetadata(0,     OnToChanged));
+        public static readonly DependencyProperty SelectedNumberProperty    = DependencyProperty.Register("SelectedNumber",    typeof(Int32),  typeof(NumberPickerControl), new PropertyMetadata(0,     OnSelectedNumberChanged));
+        public static readonly DependencyProperty HideSignButtonsProperty   = DependencyProperty.Register("HideSignButtons",   typeof(Int32),  typeof(NumberPickerControl), new PropertyMetadata(false, OnHideSignButtonsChanged));
+        public static readonly DependencyProperty ButtonNumberWidthProperty = DependencyProperty.Register("ButtonNumberWidth", typeof(Double), typeof(NumberPickerControl), new PropertyMetadata(48.0,  OnButtonNumberWidthChanged));
 
         public static Int32 GetFrom(DependencyObject obj) { return (Int32)obj.GetValue(FromProperty); }
         public static void SetFrom(DependencyObject obj, Int32 value) { obj.SetValue(FromProperty, value); }
@@ -23,15 +24,20 @@ namespace CMScoutIntrinsic {
         public static Boolean GetHideSignButtons(DependencyObject obj) { return (Boolean)obj.GetValue(HideSignButtonsProperty); }
         public static void SetHideSignButtons(DependencyObject obj, Boolean value) { obj.SetValue(HideSignButtonsProperty, value); }
 
-        public Int32   From            { get { return (Int32)GetValue(FromProperty);              } set { SetValue(FromProperty,            value); } }
-        public Int32   To              { get { return (Int32)GetValue(ToProperty);                } set { SetValue(ToProperty,              value); } }
-        public Int32   SelectedNumber  { get { return (Int32)GetValue(SelectedNumberProperty);    } set { SetValue(SelectedNumberProperty,  value); } }
-        public Boolean HideSignButtons { get { return (Boolean)GetValue(HideSignButtonsProperty); } set { SetValue(HideSignButtonsProperty, value); } }
+        public static Double GetButtonNumberWidth(DependencyObject obj) { return (Double)obj.GetValue(ButtonNumberWidthProperty); }
+        public static void SetButtonNumberWidth(DependencyObject obj, Double value) { obj.SetValue(ButtonNumberWidthProperty, value); }
+
+        public Int32   From              { get { return (Int32)GetValue(FromProperty);               } set { SetValue(FromProperty,              value); } }
+        public Int32   To                { get { return (Int32)GetValue(ToProperty);                 } set { SetValue(ToProperty,                value); } }
+        public Int32   SelectedNumber    { get { return (Int32)GetValue(SelectedNumberProperty);     } set { SetValue(SelectedNumberProperty,    value); } }
+        public Boolean HideSignButtons   { get { return (Boolean)GetValue(HideSignButtonsProperty);  } set { SetValue(HideSignButtonsProperty,   value); } }
+        public Double  ButtonNumberWidth { get { return (Double)GetValue(ButtonNumberWidthProperty); } set { SetValue(ButtonNumberWidthProperty, value); } }
 
         private static void OnFromChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args) { ((NumberPickerControl)obj).OnFromChanged(args); }
         private static void OnToChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args) { ((NumberPickerControl)obj).OnToChanged(args); }
         private static void OnSelectedNumberChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args) { ((NumberPickerControl)obj).OnSelectedNumberChanged(args); }
         private static void OnHideSignButtonsChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args) { ((NumberPickerControl)obj).OnHideSignButtonsChanged(args); }
+        private static void OnButtonNumberWidthChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args) { ((NumberPickerControl)obj).OnButtonNumberWidthChanged(args); }
 
 
 
@@ -122,6 +128,9 @@ namespace CMScoutIntrinsic {
         }
 
         private void OnHideSignButtonsChanged(DependencyPropertyChangedEventArgs args) {
+        }
+
+        private void OnButtonNumberWidthChanged(DependencyPropertyChangedEventArgs args) {
         }
 
         private void OnFlyoutOpened(Object sender, Object args) {

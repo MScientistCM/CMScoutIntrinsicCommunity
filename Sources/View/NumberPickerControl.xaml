@@ -10,6 +10,7 @@
         <Setter Property="To"                  Value="0"     />
         <Setter Property="SelectedNumber"      Value="0"     />
         <Setter Property="HideSignButtons"     Value="False" />
+        <Setter Property="ButtonNumberWidth"   Value="48"    />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="m:NumberPickerControl">
@@ -43,7 +44,7 @@
                         <Button
                             Grid.Row="0" Grid.Column="1"
                             Content="{TemplateBinding SelectedNumber}"
-                            Width="48" Height="32"
+                            Width="{TemplateBinding ButtonNumberWidth}" Height="32"
                             x:Name="ButtonNumber">
                             <Button.Flyout>
                                 <Flyout>

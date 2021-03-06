@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="37197VladimirFilatov.CMScoutIntrinsic" Publisher="CN=74581949-4548-48B5-B187-D4C793A09BA5" Version="10.0.0.0" />
+  <Identity Name="37197VladimirFilatov.CMScoutIntrinsic" Publisher="CN=74581949-4548-48B5-B187-D4C793A09BA5" Version="18.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="364dcdc4-aad4-48cb-af7b-dd6a9c64056d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>CM Scout Intrinsic</DisplayName>

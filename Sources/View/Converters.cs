@@ -564,7 +564,7 @@ namespace CMScoutIntrinsic {
 
             WeightsSet weightsSet = app.SettingsService.GetWeightsSets().Find(item => item.IsLast == true);
 
-            Byte[] weights = weightsSet.Weights[ratingPositionIndex];
+            UInt16[] weights = weightsSet.Weights[ratingPositionIndex];
 
             List<Int32> indexes = new List<Int32>();
 
@@ -594,8 +594,8 @@ namespace CMScoutIntrinsic {
 
             Boolean isHighlited = indexes.Contains(index);
 
-            Int32 leftValue  = LeftPlayer.Value.AttributeValues[index].IntrinsicNormalized;
-            Int32 rightValue = RightPlayer.Value.AttributeValues[index].IntrinsicNormalized;
+            Int32 leftValue  = LeftPlayer.Value.AttributeValues[index].InMatchNormalized;
+            Int32 rightValue = RightPlayer.Value.AttributeValues[index].InMatchNormalized;
 
             if(DataService.Attributes[index].IsLessBetter) {
                 leftValue  = 21 - leftValue;
@@ -652,7 +652,7 @@ namespace CMScoutIntrinsic {
 
             WeightsSet weightsSet = app.SettingsService.GetWeightsSets().Find(item => item.IsLast == true);
 
-            Byte[] weights = weightsSet.Weights[ratingPositionIndex];
+            UInt16[] weights = weightsSet.Weights[ratingPositionIndex];
 
             List<Int32> indexes = new List<Int32>();
 
@@ -682,8 +682,8 @@ namespace CMScoutIntrinsic {
 
             Boolean isHighlited = indexes.Contains(index);
 
-            Int32 leftValue  = LeftPlayer.Value.AttributeValues[index].IntrinsicNormalized;
-            Int32 rightValue = RightPlayer.Value.AttributeValues[index].IntrinsicNormalized;
+            Int32 leftValue  = LeftPlayer.Value.AttributeValues[index].InMatchNormalized;
+            Int32 rightValue = RightPlayer.Value.AttributeValues[index].InMatchNormalized;
 
             if(DataService.Attributes[index].IsLessBetter) {
                 leftValue  = 21 - leftValue;

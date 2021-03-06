@@ -41,12 +41,16 @@ namespace CMScoutIntrinsic {
         public readonly Int16 IntrinsicGraemeKelly;
         public readonly SByte IntrinsicNormalized;
         public readonly SByte InGame;
+        public readonly SByte InMatch;
+        public readonly SByte InMatchNormalized;
 
-        public AttributeValue(SByte intrinsic, Int16 intrinsicGraemeKelly, SByte intrinsicNormalized, SByte inGame) {
+        public AttributeValue(SByte intrinsic, Int16 intrinsicGraemeKelly, SByte intrinsicNormalized, SByte inGame, SByte inMatch, SByte inMatchNormalized) {
             Intrinsic            = intrinsic;
             IntrinsicGraemeKelly = intrinsicGraemeKelly;
             IntrinsicNormalized  = intrinsicNormalized;
             InGame               = inGame;
+            InMatch              = inMatch;
+            InMatchNormalized    = inMatchNormalized;
         }
     }
 
@@ -209,57 +213,59 @@ namespace CMScoutIntrinsic {
     } 
 
     class CMClub {
-        public Int32   Id;
-        public String  Name;
-        public SByte   GenderName;
-        public String  ShortName;
-        public SByte   GenderShortName;
-        public Int32   NationId;
-        public Int32   DivisionId;
-        public Int32   LastDivisionId;
-        public SByte   LastPosition;
-        public Int32   ReserveDivisionId;
-        public SByte   ProfessionalStatus;
-        public Int32   Cash;
-        public Int32   StadiumId;
-        public SByte   OwnStadium;
-        public Int32   ReserveStadiumId;
-        public SByte   MatchDay;
-        public Int32   Attendance;
-        public Int32   MinAttendance;
-        public Int32   MaxAttendance;
-        public SByte   Training;
-        public Int16   Reputation;
-        public SByte   PLC;
-        public Int32   ForeColour1Id;
-        public Int32   BackColour1Id;
-        public Int32   ForeColour2Id;
-        public Int32   BackColour2Id;
-        public Int32   ForeColour3Id;
-        public Int32   BackColour3Id;
-        public Int32   FavStaff1Id;
-        public Int32   FavStaff2Id;
-        public Int32   FavStaff3Id;
-        public Int32   DisStaff1Id;
-        public Int32   DisStaff2Id;
-        public Int32   DisStaff3Id;
-        public Int32   Rival1Id;
-        public Int32   Rival2Id;
-        public Int32   Rival3Id;
-        public Int32   ChairmanId;
-        public Int32[] DirectorsIds;
-        public Int32   ManagerId;
-        public Int32   AssistantManagerId;
-        public Int32[] SquadIds;
-        public Int32[] CoachIds;
-        public Int32[] ScoutIds;
-        public Int32[] PhysioIds;
-        public Int32   EuroFlag;
-        public SByte   EuroSeeding;
-        public Int32[] TeamSelectedIds;
-        public Int32[] TacticTrainingIds;
-        public Int32   TacticSelected;
-        public SByte   HasLinkedClub;
+        public Int32    Id;
+        public String   Name;
+        public SByte    GenderName;
+        public String   ShortName;
+        public SByte    GenderShortName;
+        public Int32    NationId;
+        public Int32    DivisionId;
+        public Int32    LastDivisionId;
+        public SByte    LastPosition;
+        public Int32    ReserveDivisionId;
+        public SByte    ProfessionalStatus;
+        public Int32    Cash;
+        public Int32    StadiumId;
+        public SByte    OwnStadium;
+        public Int32    ReserveStadiumId;
+        public SByte    MatchDay;
+        public Int32    Attendance;
+        public Int32    MinAttendance;
+        public Int32    MaxAttendance;
+        public SByte    Training;
+        public Int16    Reputation;
+        public SByte    PLC;
+        public Int32    ForeColour1Id;
+        public Int32    BackColour1Id;
+        public Int32    ForeColour2Id;
+        public Int32    BackColour2Id;
+        public Int32    ForeColour3Id;
+        public Int32    BackColour3Id;
+        public Int32    FavStaff1Id;
+        public Int32    FavStaff2Id;
+        public Int32    FavStaff3Id;
+        public Int32    DisStaff1Id;
+        public Int32    DisStaff2Id;
+        public Int32    DisStaff3Id;
+        public Int32    Rival1Id;
+        public Int32    Rival2Id;
+        public Int32    Rival3Id;
+        public Int32    ChairmanId;
+        public Int32[]  DirectorsIds;
+        public Int32    ManagerId;
+        public Int32    AssistantManagerId;
+        public Int32[]  SquadIds;
+        public Int32[]  CoachIds;
+        public Int32[]  ScoutIds;
+        public Int32[]  PhysioIds;
+        public Int32    EuroFlag;
+        public SByte    EuroSeeding;
+        public Int32[]  TeamSelectedIds;
+        public Int32[]  TacticTrainingIds;
+        public Int32    TacticSelected;
+        public SByte    HasLinkedClub;
+
+        public CMNation Nation;
     }
 
     class CMName {
@@ -373,63 +379,67 @@ namespace CMScoutIntrinsic {
     }
 
     class CMStaff {
-        public Int32      Id;
-        public Int32      FirstNameId;
-        public Int32      SecondNameId;
-        public Int32      CommonNameId;
-        public DateTime?  DateOfBirth;
-        public Int16      YearOfBirth;
-        public Int32      FirstNationId;
-        public Int32      SecondNationId;
-        public Byte       IntApps;
-        public Byte       IntGoals;
-        public Int32      NationalJobId;
-        public SByte      JobForNation;
-        public DateTime?  DateJoinedNation;
-        public DateTime?  DateExpiresNation;
-        public Int32      ClubJobId;
-        public SByte      JobForClub;
-        public DateTime?  DateJoinedClub;
-        public DateTime?  DateExpiresClub;
-        public Int32      Wage;
-        public Int32      Value;
-        public SByte      Adaptability;
-        public SByte      Ambition;
-        public SByte      Determination;
-        public SByte      Loyality;
-        public SByte      Pressure;
-        public SByte      Professionalism;
-        public SByte      Sportsmanship;
-        public SByte      Temperament;
-        public SByte      PlayingSquad;
-        public SByte      Classification;
-        public SByte      ClubValuation;
-        public Int32      PlayerId;
-        public Int32      StaffPreferencesId;
-        public Int32      NonPlayerId;
-        public SByte      SquadSelectedFor;
+        public Int32            Id;
+        public Int32            FirstNameId;
+        public Int32            SecondNameId;
+        public Int32            CommonNameId;
+        public DateTime?        DateOfBirth;
+        public Int16            YearOfBirth;
+        public Int32            FirstNationId;
+        public Int32            SecondNationId;
+        public Byte             IntApps;
+        public Byte             IntGoals;
+        public Int32            NationalJobId;
+        public SByte            JobForNation;
+        public DateTime?        DateJoinedNation;
+        public DateTime?        DateExpiresNation;
+        public Int32            ClubJobId;
+        public SByte            JobForClub;
+        public DateTime?        DateJoinedClub;
+        public DateTime?        DateExpiresClub;
+        public Int32            Wage;
+        public Int32            Value;
+        public SByte            Adaptability;
+        public SByte            Ambition;
+        public SByte            Determination;
+        public SByte            Loyality;
+        public SByte            Pressure;
+        public SByte            Professionalism;
+        public SByte            Sportsmanship;
+        public SByte            Temperament;
+        public SByte            PlayingSquad;
+        public SByte            Classification;
+        public SByte            ClubValuation;
+        public Int32            PlayerId;
+        public Int32            StaffPreferencesId;
+        public Int32            NonPlayerId;
+        public SByte            SquadSelectedFor;
 
-        public CMName     FirstName;
-        public CMName     SecondName;
-        public CMName     CommonName;
-        public CMNation   FirstNation;
-        public CMNation   SecondNation;
-        public CMClub     ClubJob;
-        public CMPlayer   Player;
-        public Int32?     Age;
-        public CMContract Contract;
-        public CMContract LoanContract;
+        public CMName           FirstName;
+        public CMName           SecondName;
+        public CMName           CommonName;
+        public CMNation         FirstNation;
+        public CMNation         SecondNation;
+        public CMClub           ClubJob;
+        public CMPlayer         Player;
+        public Int32?           Age;
+        public CMContract       Contract;
+        public CMContract       LoanContract;
 
         public AttributeValue[] AttributeValues;
 
-        public Double[]  Ratings;
+        public Double[]         Ratings;
+
+        public Boolean          IsFavorite;
     }
 
     enum CA18ViewMode {
         Intrinsic,
         IntrinsicGraemeKelly,
         IntrinsicNormalized,
-        InGame
+        InGame,
+        InMatch,
+        InMatchNormalized
     }
 
     class Filter {
@@ -461,6 +471,7 @@ namespace CMScoutIntrinsic {
         public Boolean[] Sides;
         public Boolean[] Positions;
         public SByte[]   Attributes;
+        public Boolean   IsFavorite;
 
         public Filter() {
             CAFrom =   1;
@@ -498,15 +509,15 @@ namespace CMScoutIntrinsic {
     // Off The Ball = Movement 
 
     class WeightsSet {
-        public Boolean  IsLast;
-        public String   Name;
-        public Byte[][] Weights;
+        public Boolean    IsLast;
+        public String     Name;
+        public UInt16[][] Weights;
 
         public WeightsSet() {
-            Weights = new Byte[DataService.RatingPositions.Length][];
+            Weights = new UInt16[DataService.RatingPositions.Length][];
 
             for(Int32 i = 0; i < DataService.RatingPositions.Length; ++i) {
-                Weights[i] = new Byte[DataService.Attributes.Length];
+                Weights[i] = new UInt16[DataService.Attributes.Length];
             }
         }
     }
@@ -684,28 +695,29 @@ namespace CMScoutIntrinsic {
             try {
                 await Task.Run(
                     async () => {
-                        DateTime?                        gameDate                    = null;
-                        Int32?                           minAge                      = null;
-                        Int32?                           maxAge                      = null;
-                        List<CMNation>                   nations                     = null;
-                        List<CMDivision>                 divisions                   = null;
-                        List<CMClub>                     clubs                       = null;
-                        List<CMStaff>                    staffs                      = null;
-                        Dictionary<String, Int32>        clubNameToClubIdMap         = null;
-                        Dictionary<String, Int32>        divisionNameToDivisionIdMap = null;
-                        Dictionary< Int32, List<Int32> > squadIdToClubIdsMap         = null;
-                        Pair<SByte, SByte>[]             ca18AttributeValueRanges    = null;
+                        DateTime?                        gameDate                        = null;
+                        Int32?                           minAge                          = null;
+                        Int32?                           maxAge                          = null;
+                        List<CMNation>                   nations                         = null;
+                        List<CMDivision>                 divisions                       = null;
+                        List<CMClub>                     clubs                           = null;
+                        List<CMStaff>                    staffs                          = null;
+                        Dictionary<String, Int32>        clubNameToClubIdMap             = null;
+                        Dictionary<String, Int32>        divisionNameToDivisionIdMap     = null;
+                        Dictionary< Int32, List<Int32> > squadIdToClubIdsMap             = null;
+                        Pair<SByte, SByte>[]             ca18AttributeValueRanges        = null;
+                        Pair<SByte, SByte>[]             ca18InMatchAttributeValueRanges = null;
 
-                        using (Stream stream = await file.OpenStreamForReadAsync()) {
-                            using(BinaryReader br = new BinaryReader(stream)) {
-                                Boolean isCompressed = (br.ReadInt32() == 4);
+                        using(Stream stream = await file.OpenStreamForReadAsync()) {
+                            using(BinaryReader binaryReader = new BinaryReader(stream)) {
+                                Boolean isCompressed = (binaryReader.ReadInt32() == 4);
 
                                 Debug.WriteLine("isCompressed: {0}", isCompressed);
 
                                 // Skip 4 bytes
-                                br.ReadBytes(4);
+                                binaryReader.ReadBytes(4);
 
-                                Int32 blocksCount = br.ReadInt32();
+                                Int32 blocksCount = binaryReader.ReadInt32();
 
                                 Debug.WriteLine("blocksCount: {0}", blocksCount);
 
@@ -713,9 +725,9 @@ namespace CMScoutIntrinsic {
 
                                 for(Int32 i = 0; i < blocksCount; ++i) {
                                     CMBlock block = new CMBlock {
-                                        Position = br.ReadInt32(),
-                                        Size     = br.ReadInt32(),
-                                        Name     = ReadCMString(br, 260),
+                                        Position = binaryReader.ReadInt32(),
+                                        Size     = binaryReader.ReadInt32(),
+                                        Name     = ReadCMString(binaryReader, 260),
                                     };
 
                                     blocks.Add(block);
@@ -723,11 +735,13 @@ namespace CMScoutIntrinsic {
                                     //Debug.WriteLine("{0,9} {1,9} {2}", block.Position, block.Size, block.Name);
                                 }
 
+                                CMBinaryReader br = new CMBinaryReader(binaryReader, isCompressed);
+
                                 // general.dat
                                 {
                                     CMBlock block = blocks.Find(item => item.Name == "general.dat");
 
-                                    br.BaseStream.Seek(block.Position, SeekOrigin.Begin);
+                                    br.Seek(block.Position, SeekOrigin.Begin);
 
                                     br.ReadBytes(3944);
 
@@ -742,7 +756,7 @@ namespace CMScoutIntrinsic {
                                 {
                                     CMBlock block = blocks.Find(item => item.Name == "nation.dat");
 
-                                    br.BaseStream.Seek(block.Position, SeekOrigin.Begin);
+                                    br.Seek(block.Position, SeekOrigin.Begin);
 
                                     Int32 nationsCount = block.Size / 290;
 
@@ -813,7 +827,7 @@ namespace CMScoutIntrinsic {
                                 {
                                     CMBlock block = blocks.Find(item => item.Name == "club_comp.dat");
 
-                                    br.BaseStream.Seek(block.Position, SeekOrigin.Begin);
+                                    br.Seek(block.Position, SeekOrigin.Begin);
 
                                     Int32 divisionsCount = block.Size / 107;
 
@@ -859,7 +873,7 @@ namespace CMScoutIntrinsic {
                                 {
                                     CMBlock block = blocks.Find(item => item.Name == "club.dat");
 
-                                    br.BaseStream.Seek(block.Position, SeekOrigin.Begin);
+                                    br.Seek(block.Position, SeekOrigin.Begin);
 
                                     Int32 clubsCount = block.Size / 581;
 
@@ -918,6 +932,8 @@ namespace CMScoutIntrinsic {
                                             HasLinkedClub      = br.ReadSByte(),
                                         };
 
+                                        club.Nation = GetNationFromId(club.NationId, nations);
+
                                         clubs.Add(club);
 
                                         //Debug.WriteLine("Club. {0,6} {1}", club.Id, club.Name);
@@ -949,13 +965,13 @@ namespace CMScoutIntrinsic {
                                 Debug.WriteLine("clubs.Count: {0}", clubs.Count);
 
                                 // names
-                                Func<BinaryReader, String, List<CMName> > loadNames =
+                                Func<CMBinaryReader, String, List<CMName> > loadNames =
                                     (br_, blockName) => {
                                         List<CMName> names = new List<CMName>();
 
                                         CMBlock block = blocks.Find(item => item.Name == blockName);
 
-                                        br_.BaseStream.Seek(block.Position, SeekOrigin.Begin);
+                                        br_.Seek(block.Position, SeekOrigin.Begin);
 
                                         Int32 namesCount = block.Size / 60;
 
@@ -987,7 +1003,7 @@ namespace CMScoutIntrinsic {
                                 {
                                     CMBlock block = blocks.Find(item => item.Name == "player.dat");
 
-                                    br.BaseStream.Seek(block.Position, SeekOrigin.Begin);
+                                    br.Seek(block.Position, SeekOrigin.Begin);
 
                                     Int32 playersCount = block.Size / 70;
 
@@ -1072,10 +1088,16 @@ namespace CMScoutIntrinsic {
                                     ca18AttributeValueRanges[j] = new Pair<SByte, SByte>(SByte.MaxValue, SByte.MinValue);
                                 }
 
+                                ca18InMatchAttributeValueRanges = new Pair<SByte, SByte>[ Attributes.Count(item => item.IsCA18) ];
+
+                                for(Int32 j = 0; j < ca18InMatchAttributeValueRanges.Length; ++j) {
+                                    ca18InMatchAttributeValueRanges[j] = new Pair<SByte, SByte>(SByte.MaxValue, SByte.MinValue);
+                                }
+
                                 {
                                     CMBlock block = blocks.Find(item => item.Name == "staff.dat");
 
-                                    br.BaseStream.Seek(block.Position, SeekOrigin.Begin);
+                                    br.Seek(block.Position, SeekOrigin.Begin);
 
                                     Int32 staffsCount = block.Size / 110;
 
@@ -1152,12 +1174,21 @@ namespace CMScoutIntrinsic {
 
                                             foreach(Attribute a in Attributes) {
                                                 if(a.IsCA18) {
-                                                    Pair<SByte, SByte> p = ca18AttributeValueRanges[j];
-                                                    SByte              v = a.IntrinsicValueExtractor(staff);
+                                                    // Intrinsic
+                                                    Pair<SByte, SByte> p1 = ca18AttributeValueRanges[j];
+                                                    SByte              v1 = a.IntrinsicValueExtractor(staff);
 
-                                                    if(p.First  > v) { p.First  = v; }
-                                                    if(p.Second < v) { p.Second = v; }
+                                                    if(p1.First  > v1) { p1.First  = v1; }
+                                                    if(p1.Second < v1) { p1.Second = v1; }
 
+                                                    // InMatch
+                                                    Pair<SByte, SByte> p2 = ca18InMatchAttributeValueRanges[j];
+                                                    SByte              v2 = GetInMatchValue(staff, v1);
+
+                                                    if(p2.First  > v2) { p2.First  = v2; }
+                                                    if(p2.Second < v2) { p2.Second = v2; }
+
+                                                    // Next
                                                     ++j;
                                                 }
                                             }
@@ -1195,6 +1226,8 @@ namespace CMScoutIntrinsic {
                                             Int16 intrinsicGraemeKelly = 0;
                                             SByte intrinsicNormalized  = 0;
                                             SByte inGame               = 0;
+                                            SByte inMatch              = 0;
+                                            SByte inMatchNormalized    = 0;
 
                                             if(a.IsCA18) {
                                                 {
@@ -1215,8 +1248,26 @@ namespace CMScoutIntrinsic {
                                                     }
 
                                                     intrinsicNormalized = (SByte)Math.Truncate(r);
+                                                }
 
-                                                    ++j;
+                                                {
+                                                    inMatch = GetInMatchValue(staff, intrinsic);
+                                                }
+
+                                                {
+                                                    Int16 minValue = ca18InMatchAttributeValueRanges[j].First;
+                                                    Int16 maxValue = ca18InMatchAttributeValueRanges[j].Second;
+
+                                                    Double r = 20.0 * (inMatch - minValue) / (maxValue - minValue) + 0.5;
+
+                                                    if(r < 1) {
+                                                        r = 1;
+                                                    }
+                                                    else if(r > 20) {
+                                                        r = 20;
+                                                    }
+
+                                                    inMatchNormalized = (SByte)Math.Truncate(r);
                                                 }
 
                                                 {
@@ -1244,14 +1295,25 @@ namespace CMScoutIntrinsic {
                                                         }
                                                     }
                                                 }
+
+                                                ++j;
                                             }
                                             else {
+                                                if(intrinsic < 1) {
+                                                    intrinsic = 1;
+                                                }
+                                                else if(intrinsic > 20) {
+                                                    intrinsic = 20;
+                                                }
+
                                                 intrinsicGraemeKelly = intrinsic;
                                                 intrinsicNormalized  = intrinsic;
                                                 inGame               = intrinsic;
+                                                inMatch              = intrinsic;
+                                                inMatchNormalized    = intrinsic;
                                             }
 
-                                            staff.AttributeValues[i] = new AttributeValue(intrinsic, intrinsicGraemeKelly, intrinsicNormalized, inGame);
+                                            staff.AttributeValues[i] = new AttributeValue(intrinsic, intrinsicGraemeKelly, intrinsicNormalized, inGame, inMatch, inMatchNormalized);
 
                                             Boolean isGKAttr_ = (i == 15 || i == 16 || i == 17);
                                             Boolean isGK_     = (staff.Player.Goalkeeper > 14);
@@ -1305,13 +1367,13 @@ namespace CMScoutIntrinsic {
 
                                     intrinsicNormalized2Map[ attributeValues[k] ] = toIntrinsicNormalized2(k, attributeValues.Count, attributeValues.Count);
 
-                                    Debug.WriteLine("***** {0} *****", Attributes[i].Name, 0);
+                                    //Debug.WriteLine("***** {0} *****", Attributes[i].Name, 0);
 
                                     foreach(KeyValuePair<SByte, SByte> p in intrinsicNormalized2Map) {
-                                        Debug.WriteLine("{0,4} -> {1,2}", p.Key, p.Value);
+                                        //Debug.WriteLine("{0,4} -> {1,2}", p.Key, p.Value);
                                     }
 
-                                    Debug.WriteLine("");
+                                    //Debug.WriteLine("");
                                 }
 
                                 //Debug.WriteLine("***** Attributes distribution *****");
@@ -1352,7 +1414,7 @@ namespace CMScoutIntrinsic {
                                 {
                                     CMBlock block = blocks.Find(item => item.Name == "contract.dat");
 
-                                    br.BaseStream.Seek(block.Position, SeekOrigin.Begin);
+                                    br.Seek(block.Position, SeekOrigin.Begin);
 
                                     Int32 contractsPreCount = br.ReadInt32();
                                     Int32 contractsCount    = br.ReadInt32();
@@ -1466,20 +1528,154 @@ namespace CMScoutIntrinsic {
                                         }
                                     }
                                 }
-                            }
-                        }
 
-                        GameDate                     = gameDate;
-                        MinAge                       = minAge;
-                        MaxAge                       = maxAge;
-                        Nations                      = nations;
-                        Divisions                    = divisions;
-                        Clubs                        = clubs;
-                        Staffs                       = staffs;
-                        _divisionNameToDivisionIdMap = divisionNameToDivisionIdMap;
-                        _clubNameToClubIdMap         = clubNameToClubIdMap;
-                        _squadIdToClubIdsMap         = squadIdToClubIdsMap;
-                        _ca18AttributeValueRanges    = ca18AttributeValueRanges;
+                                // match_stats_matches.tmp
+                                {
+                                    CMBlock block = blocks.Find(item => item.Name == "match_stats_matches.tmp");
+
+                                    br.Seek(block.Position, SeekOrigin.Begin);
+
+                                    Int32 matchesCount = block.Size / 3450;
+
+                                    Int32 dkClubId = -2;
+
+                                    foreach(CMClub club in clubs) {
+                                        if(club.Name == "Dinamo Kiev") {
+                                            dkClubId = club.Id;
+
+                                            break;
+                                        }
+                                    }
+
+                                    Debug.WriteLine("dkClubId: {0}", dkClubId);
+
+                                    for(Int32 i = 0; i < matchesCount; ++i) {
+                                        Int32     homeTeamId = br.ReadInt32();
+                                        Int32     awayTeamId = br.ReadInt32();
+                                        DateTime? date = ReadDateTime(br);
+
+                                        br.ReadBytes(36);
+
+                                        Int32 attendance = br.ReadInt32();
+                                        Debug.WriteLine("attendance: {0}", attendance);
+
+                                        br.ReadBytes(31);
+
+                                        for(Int32 j = 0; j < 50; ++j) {
+                                            Byte team   = br.ReadByte();
+                                            Byte shirt  = br.ReadByte();
+                                            Byte type   = br.ReadByte();
+                                            Byte minute = br.ReadByte();
+
+                                            if(team == 255) {
+                                                br.ReadBytes( (50 - j - 1) * 4);
+
+                                                break;
+                                            }
+
+                                            Debug.WriteLine("Event {0}: {1} {2} {3} {4}", j, team, shirt, type, minute);
+                                        }
+
+                                        Byte homeGoals = br.ReadByte();
+
+                                        br.ReadBytes(1);
+
+                                        Byte awayGoals = br.ReadByte();
+
+                                        br.ReadBytes(1);
+
+                                        Debug.WriteLine("SCORE: {0}:{1}", homeGoals, awayGoals);
+
+                                        br.ReadBytes(8);
+
+                                        Int32 competitionId = br.ReadInt32();
+                                        Debug.WriteLine("competitionId: {0}", competitionId);
+
+                                        br.ReadBytes(97);
+
+                                        for(Int32 j = 0; j < 20; ++j) {
+                                            Int32 staffId = br.ReadInt32();
+
+                                            Debug.WriteLine("Home staffId {0}: {1}", j, staffId);
+
+                                            if(staffId != -1) {
+                                                CMStaff staff = staffs[staffId];
+
+                                                Debug.WriteLine("{0}", staff.SecondName.Name, 0);
+                                            }
+
+                                            br.ReadBytes(69);
+                                        }
+
+                                        br.ReadBytes(113);
+
+                                        for(Int32 j = 0; j < 20; ++j) {
+                                            Int32 staffId = br.ReadInt32();
+
+                                            Debug.WriteLine("Away staffId {0}: {1}", j, staffId);
+
+                                            br.ReadBytes(69);
+                                        }
+
+                                        br.ReadBytes(17);
+
+                                        if(homeTeamId < clubs.Count) {
+                                            CMClub homeClub = GetClubFromId(homeTeamId, clubs);
+
+                                            Debug.WriteLine("HOME CLUB: \"{0}\"", homeClub.Name, 0);
+                                        }
+                                        else {
+                                            CMNation homeNation = GetNationFromId(homeTeamId - clubs.Count, nations);
+
+                                            Debug.WriteLine("HOME NATION: \"{0}\"", homeNation.Name, 0);
+                                        }
+
+                                        if(awayTeamId < clubs.Count) {
+                                            CMClub awayClub = GetClubFromId(awayTeamId, clubs);
+
+                                            Debug.WriteLine("AWAY CLUB: \"{0}\"", awayClub.Name, 0);
+                                        }
+                                        else {
+                                            CMNation awayNation = GetNationFromId(awayTeamId - clubs.Count, nations);
+
+                                            Debug.WriteLine("AWAY NATION: \"{0}\"", awayNation.Name, 0);
+                                        }
+
+                                        Debug.WriteLine("DATE: {0}", date?.ToString("yyyy-MM-dd"), 0);
+
+                                        if(i == 1) {
+                                            break;
+                                        }
+
+
+/*
+                                        if(homeTeamId == dkClubId) {
+                                            CMClub homeClub = GetClubFromId(homeTeamId, clubs);
+                                            CMClub awayClub = GetClubFromId(awayTeamId, clubs);
+
+                                            Debug.WriteLine("***** STATS: {0} {1} {2}", homeClub?.Name, awayClub?.Name, date?.ToString());
+
+                                            break;
+                                        }
+*/
+                                    }
+                                }
+
+                            }
+
+                            GameDate                         = gameDate;
+                            MinAge                           = minAge;
+                            MaxAge                           = maxAge;
+                            Nations                          = nations;
+                            Divisions                        = divisions;
+                            Clubs                            = clubs;
+                            Staffs                           = staffs;
+                            _divisionNameToDivisionIdMap     = divisionNameToDivisionIdMap;
+                            _clubNameToClubIdMap             = clubNameToClubIdMap;
+                            _squadIdToClubIdsMap             = squadIdToClubIdsMap;
+                            _ca18AttributeValueRanges        = ca18AttributeValueRanges;
+                            _ca18InMatchAttributeValueRanges = ca18InMatchAttributeValueRanges;
+                        }
                     }
                 );
             }
@@ -1559,14 +1755,14 @@ namespace CMScoutIntrinsic {
             }
         }
 
-        private static Double CalculateRating(CMStaff staff, Byte[] weights) {
+        private static Double CalculateRating(CMStaff staff, UInt16[] weights) {
             Double r = 0;
             Int32  n = 0;
 
             for(Int32 i = 0; i < staff.AttributeValues.Length; ++i) {
                 Attribute a = Attributes[i];
-                Byte      w = weights[i];
-                Int32     v = staff.AttributeValues[i].IntrinsicNormalized;
+                UInt16    w = weights[i];
+                Int32     v = staff.AttributeValues[i].InMatchNormalized;
 
                 if(a.IsLessBetter) {
                     v = 21 - v;
@@ -1620,7 +1816,7 @@ namespace CMScoutIntrinsic {
             return ((new DateTime(1, 1, 1) + (dateTo_ - dateFrom_)).Year - 1) * m;
         }
 
-        private Int32[] ReadIds(BinaryReader br, Int32 size) {
+        private Int32[] ReadIds(CMBinaryReader br, Int32 size) {
             Int32[] ids = new Int32[size];
 
             for(Int32 i = 0; i < size; ++i) {
@@ -1646,7 +1842,23 @@ namespace CMScoutIntrinsic {
             return Encoding.GetEncoding("iso-8859-1").GetString(bb, 0, c);
         }
 
-        private CMDate ReadCMDate(BinaryReader br) {
+        private String ReadCMString(CMBinaryReader br, Int32 size) {
+            Byte[] bb = br.ReadBytes(size);
+
+            Int32 c = 0;
+
+            foreach(Byte b in bb) {
+                if(b == 0) {
+                    break;
+                }
+
+                ++c;
+            }
+
+            return Encoding.GetEncoding("iso-8859-1").GetString(bb, 0, c);
+        }
+
+        private CMDate ReadCMDate(CMBinaryReader br) {
             return new CMDate {
                 Day        = br.ReadInt16(),
                 Year       = br.ReadInt16(),
@@ -1654,7 +1866,7 @@ namespace CMScoutIntrinsic {
             };
         }
 
-        private DateTime? ReadDateTime(BinaryReader br) {
+        private DateTime? ReadDateTime(CMBinaryReader br) {
             return GetDateFromCMDate(ReadCMDate(br));
         }
 
@@ -1717,12 +1929,23 @@ namespace CMScoutIntrinsic {
             return (SByte)Math.Truncate(r);
         }
 
+        private SByte GetInMatchValue(CMStaff staff, SByte intrinsicValue) {
+            Double r = intrinsicValue / 5.0 + staff.Player.CurrentAbility / 20.0 + 10;
+
+            if(r < 0) {
+                r = 0;
+            }
+
+            return (SByte)Math.Truncate(r);
+        }
+
 
 
         private Dictionary<String, Int32>        _divisionNameToDivisionIdMap;
         private Dictionary<String, Int32>        _clubNameToClubIdMap;
         private Dictionary< Int32, List<Int32> > _squadIdToClubIdsMap;
         private Pair<SByte, SByte>[]             _ca18AttributeValueRanges;
+        private Pair<SByte, SByte>[]             _ca18InMatchAttributeValueRanges;
     }
 
 }

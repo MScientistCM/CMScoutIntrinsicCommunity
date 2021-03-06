@@ -27,7 +27,7 @@ namespace CMScoutIntrinsic {
             _loadLastSave     = false;
             _applyLastFilter  = false;
             _ca18Highlight    = false;
-            _ca18ViewMode     = CA18ViewMode.IntrinsicNormalized;
+            _ca18ViewMode     = CA18ViewMode.InMatchNormalized;
             _columns          = new List<String>();
             _columns2         = new List<String>();
             _mruFiles         = new List<MruFile>();
@@ -81,9 +81,13 @@ namespace CMScoutIntrinsic {
 
                 _weightsSets.Add(defaultWeightsSet);
 
-                WeightsSet cmscoutWeightsSet = await LoadWeightsSetAsync(await StorageFile.GetFileFromPathAsync(Path.Combine(Package.Current.InstalledLocation.Path, "Resources\\WeightsSet_CMScout.txt")));
+                WeightsSet cmScoutWeightsSet = await LoadWeightsSetAsync(await StorageFile.GetFileFromPathAsync(Path.Combine(Package.Current.InstalledLocation.Path, "Resources\\WeightsSet_CMScout.txt")));
 
-                _weightsSets.Add(cmscoutWeightsSet);
+                _weightsSets.Add(cmScoutWeightsSet);
+
+                WeightsSet madScientistWeightsSet = await LoadWeightsSetAsync(await StorageFile.GetFileFromPathAsync(Path.Combine(Package.Current.InstalledLocation.Path, "Resources\\WeightsSet_MadScientist.txt")));
+
+                _weightsSets.Add(madScientistWeightsSet);
             }
         }
 
@@ -237,10 +241,10 @@ namespace CMScoutIntrinsic {
                     eWeightsSet.Add(eWeights);
 
                     for(Int32 i = 0; i < weightsSet.Weights.Length; ++i) {
-                        Byte[] weights = weightsSet.Weights[i];
+                        UInt16[] weights = weightsSet.Weights[i];
 
                         for(Int32 j = 0; j < weights.Length; ++j) {
-                            Byte weight = weights[j];
+                            UInt16 weight = weights[j];
 
                             XElement eWeight = new XElement("Weight");
                             eWeights.Add(eWeight);
@@ -409,7 +413,7 @@ namespace CMScoutIntrinsic {
                                 for(Int32 j = 0; j < DataService.Attributes.Length; ++j) {
                                     XElement eWeight = eeWeight[i * DataService.Attributes.Length + j];
 
-                                    weightsSet.Weights[i][j] = Byte.Parse((String)eWeight.Attribute("Value"));
+                                    weightsSet.Weights[i][j] = UInt16.Parse((String)eWeight.Attribute("Value"));
                                 }
                             }
 
@@ -592,13 +596,13 @@ namespace CMScoutIntrinsic {
                         if(match.Success) {
                             String name = match.Groups[1].Value;
 
-                            weightsSet.Weights[0][i] = Byte.Parse(match.Groups[2].Value);
-                            weightsSet.Weights[1][i] = Byte.Parse(match.Groups[3].Value);
-                            weightsSet.Weights[2][i] = Byte.Parse(match.Groups[4].Value);
-                            weightsSet.Weights[3][i] = Byte.Parse(match.Groups[5].Value);
-                            weightsSet.Weights[4][i] = Byte.Parse(match.Groups[6].Value);
-                            weightsSet.Weights[5][i] = Byte.Parse(match.Groups[7].Value);
-                            weightsSet.Weights[6][i] = Byte.Parse(match.Groups[8].Value);
+                            weightsSet.Weights[0][i] = UInt16.Parse(match.Groups[2].Value);
+                            weightsSet.Weights[1][i] = UInt16.Parse(match.Groups[3].Value);
+                            weightsSet.Weights[2][i] = UInt16.Parse(match.Groups[4].Value);
+                            weightsSet.Weights[3][i] = UInt16.Parse(match.Groups[5].Value);
+                            weightsSet.Weights[4][i] = UInt16.Parse(match.Groups[6].Value);
+                            weightsSet.Weights[5][i] = UInt16.Parse(match.Groups[7].Value);
+                            weightsSet.Weights[6][i] = UInt16.Parse(match.Groups[8].Value);
 
                             ++i;
                         }
@@ -611,11 +615,11 @@ namespace CMScoutIntrinsic {
             }
 
             for(Int32 i = 0; i < weightsSet.Weights.Length; ++i) {
-                Byte[] weights = weightsSet.Weights[i];
+                UInt16[] weights = weightsSet.Weights[i];
 
                 Int32 n = 0;
 
-                foreach(Byte b in weights) {
+                foreach(UInt16 b in weights) {
                     n += b;
                 }
 

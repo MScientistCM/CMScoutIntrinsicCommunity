@@ -12,10 +12,10 @@ namespace CMScoutIntrinsic {
             LeftPlayer  = new CMStaffVM(leftPlayer);
             RightPlayer = new CMStaffVM(rightPlayer);
 
-            LeftPlayer.UpdateAttributes(CA18ViewMode.IntrinsicNormalized);
+            LeftPlayer.UpdateAttributes(CA18ViewMode.InMatchNormalized);
             LeftPlayer.UpdateRatings();
 
-            RightPlayer.UpdateAttributes(CA18ViewMode.IntrinsicNormalized);
+            RightPlayer.UpdateAttributes(CA18ViewMode.InMatchNormalized);
             RightPlayer.UpdateRatings();
 
             // Rating positions

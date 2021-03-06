@@ -1,0 +1,53 @@
+MadScientist
+                     GK     D    DM     M    AM     A    WB
+
+Anticipation        600   600   300    50    20   300   150
+Creativity            0     0    25   300 30000    10   500
+Crossing              0     0     0    10    25     0 30000
+Decisions          1200   600   300  2500   100    75   300
+Dribbling             0     0    10  2500 30000  5000  2000
+Finishing             0     0     5   150  1000 30000    15
+Heading               0   100    50     5     5  2000     5
+Long Shots            0     0    50   150  5000    60   125
+Marking               0  1500   500    50     0     0   250
+Off The Ball          0     0     0   300  2500 30000   150
+Passing              50    50   500 30000  5000    10  2000
+Penalties             0     0     0     0     0     0     0
+Positioning        6000 30000 10000   300     0     0 30000
+Tackling            300  1500  1500   150    10     5   750
+Throw Ins             0     0     0     0     0     0    50
+Handling          30000     0     0     0     0     0     0
+One On Ones        3600     0     0     0     0     0     0
+Reflexes           6000     0     0     0     0     0     0
+
+Acceleration        300    30     5    50   300   150   300
+Agility            6000     0     0     0     0     0     0
+Balance               1    15    10    50    45    40    40
+Corners               0     0     0     1     1     0     0
+Flair                 0     0     0    50  1000  1000    10
+Injury Proneness    300    15     5     5    15    30    10
+Jumping            1200   600   200    10     7   200    25
+Natural Fitness       5    20    30    20    50    30    50
+Pace                 25   300    50    10  2500  1000  2000
+Set Pieces            0     0     0     1     1     0     0
+Stamina               5    20    30    15    50    15   100
+Strength             75  1200  1200   120     5    60   360
+Technique             4     8    25  5000  1000   100   100
+Work Rate             3    50   150    50    20    10   150
+
+Adaptability         20    15    12    10    10    10    12
+Aggression            0  1200  3600    25     2     1   600
+Ambition              0     0     0     0     0     0     0
+Bravery             600  1200   600    60    30    60   300
+Consistency       15000  5000   500   100    50  1500  1000
+Determination     12000  1200   120    30  6000  3000   120
+Dirtiness           300   100    50     3     2     2    20
+Important Matches 15000  1500   150   150    50  1000   100
+Influence             2    25    25     9     3     3     9
+Loyality             25     3     3     5    25    25     3
+Pressure          15000  1500   150    15    15  1000    50
+Professionalism     300    50    25    10    25    50    20
+Sportsmanship         0     0     0     0     0     0     0
+Teamwork              3    50    50    50    25     0    50
+Temperament         300    50    25    10    25    50    20
+Versatility           0    20    20     5    20     0    25
