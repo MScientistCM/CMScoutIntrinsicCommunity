@@ -1,53 +1,53 @@
-MadScientist
+MadScientist_07Mar2021
                      GK     D    DM     M    AM     A    WB
 
-Anticipation        600   600   300    50    20   300   150
-Creativity            0     0    25   300 30000    10   500
-Crossing              0     0     0    10    25     0 30000
-Decisions          1200   600   300  2500   100    75   300
-Dribbling             0     0    10  2500 30000  5000  2000
-Finishing             0     0     5   150  1000 30000    15
-Heading               0   100    50     5     5  2000     5
-Long Shots            0     0    50   150  5000    60   125
-Marking               0  1500   500    50     0     0   250
-Off The Ball          0     0     0   300  2500 30000   150
-Passing              50    50   500 30000  5000    10  2000
-Penalties             0     0     0     0     0     0     0
-Positioning        6000 30000 10000   300     0     0 30000
-Tackling            300  1500  1500   150    10     5   750
-Throw Ins             0     0     0     0     0     0    50
-Handling          30000     0     0     0     0     0     0
-One On Ones        3600     0     0     0     0     0     0
-Reflexes           6000     0     0     0     0     0     0
+Anticipation        800  1200  1000    50    20  1150   150
+Creativity            0     0  2000 40000 45000    10  2000
+Crossing              0     0     0    10  2500     0 55000
+Decisions          1200   600   400  5000   100    90   500
+Dribbling             0     0  2000 40000 52000  5000 22000
+Finishing             0     0     5  5000 30000 60000    15
+Heading               0   100  1000     5     5 25000     5
+Long Shots            0     0  2000 10000  7500  1000  1250
+Marking               0 12500  1250   100     0     0  1250
+Off The Ball          0     0    75  1200 35000 65000   550
+Passing            7500  3500 15000 60000 25000  1000 10000
+Penalties             0     0     0     1     1     1     0
+Positioning       12000 65000 55000  3000     0     0 55000
+Tackling           2500 25000 20000  2000   100    85 25000
+Throw Ins             0     0     0     0     0     0 12500
+Handling          60000     0     0     0     0     0     0
+One On Ones       30000     0     0   500  8500 20000     0
+Reflexes          30000     0     0     0     0     0     0
 
-Acceleration        300    30     5    50   300   150   300
-Agility            6000     0     0     0     0     0     0
-Balance               1    15    10    50    45    40    40
+Acceleration       6000  4000  2000  6000  5000  5000  7000
+Agility           25000     0     0     0     0     0     0
+Balance               1    15    15    50    45    40    40
 Corners               0     0     0     1     1     0     0
-Flair                 0     0     0    50  1000  1000    10
-Injury Proneness    300    15     5     5    15    30    10
-Jumping            1200   600   200    10     7   200    25
-Natural Fitness       5    20    30    20    50    30    50
-Pace                 25   300    50    10  2500  1000  2000
+Flair                 0     0     0    50  5000  3000    20
+Injury Proneness   3000   150   300    50   150   300   150
+Jumping           25000 12500  7500   200    80  8050  2000
+Natural Fitness      50   200   500   200  1250   300  2500
+Pace                250 15000  5000  1000 25000 15000 15000
 Set Pieces            0     0     0     1     1     0     0
-Stamina               5    20    30    15    50    15   100
-Strength             75  1200  1200   120     5    60   360
-Technique             4     8    25  5000  1000   100   100
-Work Rate             3    50   150    50    20    10   150
+Stamina               5   200   300   150  4000   150  8000
+Strength           1500 15000 15000  1200    50  1000  3600
+Technique             4     8   100 25000  5000   200  1000
+Work Rate             3   800  2000  1150  1500   700  5000
 
-Adaptability         20    15    12    10    10    10    12
-Aggression            0  1200  3600    25     2     1   600
+Adaptability        200   500   750  1000  1000  1000   350
+Aggression            0  8000 30000  2000     2     1 15000
 Ambition              0     0     0     0     0     0     0
-Bravery             600  1200   600    60    30    60   300
-Consistency       15000  5000   500   100    50  1500  1000
-Determination     12000  1200   120    30  6000  3000   120
+Bravery           12000 12000 12000   600    30   600  1500
+Consistency       30000 20000  5000 20000  3000  4000  5000
+Determination      6000  1200  1500  4000 12600  5000  2000
 Dirtiness           300   100    50     3     2     2    20
-Important Matches 15000  1500   150   150    50  1000   100
-Influence             2    25    25     9     3     3     9
-Loyality             25     3     3     5    25    25     3
-Pressure          15000  1500   150    15    15  1000    50
-Professionalism     300    50    25    10    25    50    20
+Important Matches 30000 20000  5000 20000  3000  5000  5000
+Influence           500   160   150   100     3    50    10
+Loyality            250   300   300   500   750   750   200
+Pressure          30000  1500  1500  3000  2000  5000  1500
+Professionalism    9000  4500  4000  4000  4000   500  2000
 Sportsmanship         0     0     0     0     0     0     0
-Teamwork              3    50    50    50    25     0    50
-Temperament         300    50    25    10    25    50    20
-Versatility           0    20    20     5    20     0    25
+Teamwork             30   100  2500 10000   850     0 10000
+Temperament        2000  2500  2500  1500  1250   250  1250
+Versatility           0  1250  3000  1500  4000     0  4000 
